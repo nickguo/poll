@@ -1,0 +1,11 @@
+Socket actions:
+    connection:
+        1. server "on"'s connection
+        2. server emits active/inactive poll.
+        3. client "on"'s poll information and populates UI
+    new poll: 
+        1. action initiated by user. [emit: client, on: server]
+        2. server must update all users' UI [emit: server, on: client]
+    vote:
+        1. action initiated by user. [emit: client, on: server]
+        2. server must update all users' UI [emit: server, on: client]
