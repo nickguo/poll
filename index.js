@@ -28,8 +28,7 @@ app.get('/poll.js', function(req, res){
       */
 
 
-activePolls = {};
-inactivePolls = {};
+polls = {};
 
 io.on('connection', function(socket){
   console.log('connected ' + socket.id);
@@ -38,7 +37,7 @@ io.on('connection', function(socket){
     // TODO: make sure not owner of poll
     // if vote.id != socket.id, emit and increme
     if(vote.id != socket.id) {
-      activePolls[vote.id]['options'][vote.option]++;
+      polls[vote.id]['options'][vote.option]++;
       io.emit('update_vote', vote);
     }
   });
@@ -46,16 +45,14 @@ io.on('connection', function(socket){
   socket.on('new_poll', function(poll) {
     // only add the new poll if this socket doesn't already have a poll
     console.log('got new poll');
-    if( !(socket.id in activePolls) ) {
+    if( !(socket.id in polls) ) {
       console.log('making new poll');
-      activePolls[socket.id] = poll;
+      polls[socket.id] = poll;
       io.emit('new_poll', poll);
 
       // start timer, at timeout send out a message
       setTimeout(function() {
-        // move from active to inactive
-        inactivePolls[socket.id] = activePolls[socket.id];
-        delete activePolls[socket.id];
+        delete polls[socket.id];
 
         io.emit('timeout_poll', poll);
       }, 1000 * 10);
@@ -63,8 +60,7 @@ io.on('connection', function(socket){
   });
 
   // the below only emits the current polls to the new socket
-  io.sockets.connected[socket.id].emit('current_polls',
-      { 'activePolls': activePolls, 'inactivePolls': inactivePolls });
+  io.sockets.connected[socket.id].emit('current_polls', polls);
 });
 
 http.listen(3000, function(){

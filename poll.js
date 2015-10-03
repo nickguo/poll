@@ -11,7 +11,6 @@ function makePollString(poll) {
 $(document).ready(function() {
   var socket = io();
   var activePolls;
-  var inactivePolls;
 
   $('#newPoll').click(function(){
     document.getElementById('newPollForm').style.display = "flex";
@@ -37,10 +36,8 @@ $(document).ready(function() {
   });
 
   socket.on('current_polls', function(currentPolls){
-    activePolls = currentPolls['activePolls'];
-    inactivePolls = currentPolls['inactivePolls'];
-    for(poll in activePolls){
-      $("#activePolls").append(makePollString(activePolls[poll]));
+    for(poll in currentPolls){
+      $("#activePolls").append(makePollString(currentPolls[poll]));
     }
   });
 
