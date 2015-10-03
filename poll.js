@@ -1,6 +1,6 @@
 function makePoll(socket, poll, created) {
   created = created || false;
-  var pollDiv = $('<div id="' + poll.id + '" class="activePollMenu"></div>');
+  var pollDiv = $('<div id="' + poll.id + '" class="activePollMenu"> </div>');
 
   pollDiv.append(poll['title'] + "<br>");
   for (var key_original in poll['options']) {
@@ -20,6 +20,12 @@ function makePoll(socket, poll, created) {
     }(key_original));
   }
   $("#pollWrapper").prepend(pollDiv);
+  var voteWrapper = $('<div class="voteBox"></div>');
+  voteWrapper.append($('<div class="noVote"></div>'));
+  voteWrapper.append($('<div class="yesVote"></div>'));
+
+  pollDiv.append(voteWrapper);
+
   pollDiv.css("display", "none");
   pollDiv.css("height", "80px");
   pollDiv.fadeIn("slow", function(){});
