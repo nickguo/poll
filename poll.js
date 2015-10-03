@@ -88,24 +88,24 @@ $(document).ready(function() {
 
 
 var plusPulledDown = false;
-$("#addPollButton").click(function(){
+
+$("#addPollDiv").click(function(){
     if(plusPulledDown == false) {
-        $("#addPollDiv").css("height", "200px");
-        $("#addPollDiv").css("background-color", "white");
-        $("#addPollDiv").css("border-bottom-color", "#ff8f00");
-        $("#addPollDiv").css("border-top-color", "#ff8f00");
-        $("#createNewPollForm").css("display", "inline-block");
-        $("#addPollButton").css("top", "170px");
-        $("#addPollButton").css("color", "#ff8f00");
+        //$(".addPollForm").css("display", "inline-block");
+        $(".addPollForm").css("height", "180px");
+        $(".addPollForm").css("border-bottom-color", "#ff8f00");
+        $(".addPollForm").css("border-top-color", "#ff8f00");
+       // $("#addPollDiv").css("top", "200px");
+        $("#createNewPollForm").fadeIn("slow", function(){});
+        //$("#addPollButton").css("top", "170px");
+        //$("#addPollButton").css("color", "#ff8f00");
         plusPulledDown = true;
     } else {
-        $("#addPollDiv").css("height", "50px");
-        $("#addPollDiv").css("background-color", "#ff8f00");
-        $("#addPollDiv").css("border-bottom-color", "white");
-        $("#addPollDiv").css("border-top-color", "white");
-        $("#createNewPollForm").css("display", "none");
-        $("#addPollButton").css("top", "15px");
-        $("#addPollButton").css("color", "white");
+        $(".addPollForm").css("height", "0px");
+        $(".addPollForm").css("border-bottom-color", "white");
+        $(".addPollForm").css("border-top-color", "white");
+        $("#createNewPollForm").fadeOut("slow", function(){});
+
         plusPulledDown = false;
     }
 });

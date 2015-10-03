@@ -41,47 +41,45 @@
   </style>
 
   <body style="width:100%">
-    <div class="activePolls mdl-card mdl-shadow--4dp" style="100%">
+    <div class="activePolls mdl-card mdl-shadow--4dp" style="100%;width:33%">
       <div class="mdl-card__title">
         <h1 class="mdl-card__title-text ">
           Poll Feed
         </h1>
       </div>
+
+      <div class="addPollForm">
+        <div id="createNewPollForm" style="display:none;padding-top:5px;padding-left:10px">
+          <h2 class="mdl-card__title-text" id="createPollTitle">Create a poll</h2>   
+          <div class="mdl-card__supporting-text" style="padding-top:0px">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin-right: 10px;padding-bottom:0px;padding-top:5px;">
+              <div style="float:left;padding-top:8px">Title</div>
+              <div style="float:right">
+                <input class="mdl-textfield__input" type="text" id="title" /              </div>
+              </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="padding-bottom:0px;padding-top:8px;">
+              <div style="float:left;padding-top:8px">Option 1:</div>
+              <div style="float:right">
+                <input class="mdl-textfield__input" type="text" id="option1" />
+              </div>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="padding-top:10px">
+              <div style="float:left;padding-top:8px">Option 2:</div>
+              <div style="float:right">
+                <input class="mdl-textfield__input" type="text" id="option2" style="float:right"/> 
+              </div>
+            </div>
+          </div>        
+          </div>
+        </div>
+      </div>
       <div id="addPollDiv" style="height:50px;position:relative">
         <span class="glyphicon glyphicon-plus" id="addPollButton"></span>
-        <div id="createNewPollForm" style="display:none">
-            <h2 class="mdl-card__title-text" id="createPollTitle">Create a poll</h2>
-            
-        </div>
       </div>
     </div>
+      
     <div style="position: fixed; left: 33%; width: 67%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center">
-
-      <div class="newPoll mdl-card mdl-shadow--2dp" style="display: flex; align-content: center; justify-content: center">
-        <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text">Create a poll</h2>
-        </div>
-        <div class="mdl-card__supporting-text">
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin-right: 10px">
-            <input class="mdl-textfield__input" type="text" id="title" />
-            <label class="mdl-textfield__label" for="title">Poll Title...</label>
-          </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="option1" />
-            <label class="mdl-textfield__label" for="option1">Choice 1...</label>
-          </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="option2" />
-            <label class="mdl-textfield__label" for="option2">Choice 2...</label>
-            <div style="margin-left: 400px">
-              <!-- Accent-colored raised button with ripple -->
-              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="newPoll">
-                Create
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      
     </div>
   </body>
 

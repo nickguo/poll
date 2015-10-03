@@ -21,7 +21,7 @@
     background-color: #ff8f00;
     border-bottom: 1px solid white;
     border-top: 1px solid white;
-    padding-top: 5px;
+    top: 7px;
     display:flex;
     justify-content: center;
     transition: height 1s, background-color 1s, border-bottom-color 1s, border-top-color 1s;
@@ -41,6 +41,17 @@
     -o-transition: display 0.5s;
     
 }
+
+.addPollForm {
+    height:0px;
+    border-top: 1px solid white;
+    width:100%;
+    transition: height 1s, background-color 1s, border-bottom-color 1s, border-top-color 1s;
+    -moz-transition: height 1s, background-color 1s, border-bottom-color 1s, border-top-color 1s; /* Firefox 4 */
+    -webkit-transition: height 1s, background-color 1s, border-bottom-color 1s, border-top-color 1s; /* Safari and Chrome */
+    -o-transition: height 1s, background-color 1s, border-bottom-color 1s, border-top-color 1s; /* Opera */
+}
+
 
 #addPollButton {
     position: absolute;
