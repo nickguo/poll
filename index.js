@@ -11,8 +11,8 @@ app.get('/poll.js', function(req, res){
 });
 
 
-activePolls = []
-inactivePolls = []
+activePolls = {}
+inactivePolls = {}
 
 io.on('connection', function(socket){
   console.log('connected ' + socket.id);
@@ -22,7 +22,10 @@ io.on('connection', function(socket){
   });
 
   socket.on('new_poll', function(pollInfo){
-
+    if( !socket.id in activePolls ) {
+      activePolls[socket.id] = pollInfo;
+      io.emit('new_poll', pollInfo);
+    }
   });
 
   io.sockets.connected[socket.id].emit('current_polls',
