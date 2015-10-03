@@ -13,13 +13,14 @@ app.get('/poll.js', function(req, res){
 io.on('connection', function(socket){
   console.log('connected');
 
-  socket.on('vote', function(msg){
-    io.emit('vote', msg);
-  });
-});
+  socket.on('vote', function(vote_info){
+    io.emit('vote', vote_info);
 
-io.on('vote', function(socket){
-  console.log('voted');
+  });
+
+  socket.on('new_poll' function(poll_info){
+
+  });
 });
 
 http.listen(3000, function(){
