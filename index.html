@@ -47,6 +47,13 @@
           Poll Feed
         </h1>
       </div>
+      <div id="addPollDiv" style="height:50px;position:relative">
+        <span class="glyphicon glyphicon-plus" id="addPollButton"></span>
+        <div id="createNewPollForm" style="display:none">
+            <h2 class="mdl-card__title-text" id="createPollTitle">Create a poll</h2>
+            
+        </div>
+      </div>
     </div>
     <div style="position: fixed; left: 33%; width: 67%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center">
 
@@ -80,6 +87,8 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="./style/bootstrap/js/bootstrap.js"></script>
+<link rel="stylesheet" type="text/css" href="./style/bootstrap/css/bootstrap.css">
 <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
 <script src="/poll.js"></script>
 </html>

@@ -28,11 +28,11 @@ $(document).ready(function() {
     var pollData = 
       {
         'id': socket.id,
-        'title': 'pokemon', //$('#pollName').val(),
+        'title': $('#title').val(),
         'options': {
-          'ans 1': 1,
-          'ans 2': 2,
-          'ans 3': 3 
+          'ans 1': $('#option1').val(),
+          'ans 2': $('#option2').val(),
+          'ans 3': $('#option3').val() 
         }
       };
     socket.emit('new_poll', pollData);
@@ -68,3 +68,28 @@ $(document).ready(function() {
   });
 
 });
+
+
+var plusPulledDown = false;
+$("#addPollButton").click(function(){
+    if(plusPulledDown == false) {
+        $("#addPollDiv").css("height", "200px");
+        $("#addPollDiv").css("background-color", "white");
+        $("#addPollDiv").css("border-bottom-color", "#ff8f00");
+        $("#addPollDiv").css("border-top-color", "#ff8f00");
+        $("#createNewPollForm").css("display", "inline-block");
+        $("#addPollButton").css("top", "170px");
+        $("#addPollButton").css("color", "#ff8f00");
+        plusPulledDown = true;
+    } else {
+        $("#addPollDiv").css("height", "50px");
+        $("#addPollDiv").css("background-color", "#ff8f00");
+        $("#addPollDiv").css("border-bottom-color", "white");
+        $("#addPollDiv").css("border-top-color", "white");
+        $("#createNewPollForm").css("display", "none");
+        $("#addPollButton").css("top", "15px");
+        $("#addPollButton").css("color", "white");
+        plusPulledDown = false;
+    }
+});
+

@@ -36,7 +36,7 @@ io.on('connection', function(socket){
   socket.on('vote', function(vote){
     // TODO: make sure not owner of poll
     // if vote.id != socket.id, emit and increme
-    if(vote.id in polls && vote.id != socket.id) {
+    if(vote.id in polls){ //&& vote.id != socket.id) {
       if (!('voters' in polls[vote.id])) {
         polls[vote.id]['voters'] = {};
         console.log('created voters for ' + vote.id);

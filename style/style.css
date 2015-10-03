@@ -9,14 +9,51 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
     width:calc(100% - 2px);
-    height:60px;
+    height:80px;
     color: white;
-    background-color: black;
-    border: 1px solid white;
+    border-top: 1px solid #ff8f00;
+    border-bottom: 1px solid #ff8f00;
 }
 
+#addPollDiv {
+    width:100%;
+    background-color: #ff8f00;
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
+    padding-top: 5px;
+    display:flex;
+    justify-content: center;
+    transition: height 1s, background-color 1s, border-bottom-color 1s, border-top-color 1s;
+    -moz-transition: height 1s, background-color 1s, border-bottom-color 1s, border-top-color 1s; /* Firefox 4 */
+    -webkit-transition: height 1s, background-color 1s, border-bottom-color 1s, border-top-color 1s; /* Safari and Chrome */
+    -o-transition: height 1s, background-color 1s, border-bottom-color 1s, border-top-color 1s; /* Opera */
+}
+
+#createNewPollForm {
+    -webkit-transition-delay: 1s;
+    -moz-transition-delay: 1s;
+    -o-transition-delay: 1s;
+    transition-delay: 1s;
+    transition: display 0.5s;
+    -moz-transition: display 0.5s;
+    -webkit-transition: display 0.5s;
+    -o-transition: display 0.5s;
+    
+}
+
+#addPollButton {
+    position: absolute;
+    color: white;
+    left: calc(50% - 5px);
+    top: 15px;
+    transition: top 1s, color 1s;
+    -moz-transition: top 1s, color 1s;
+    -webkit-transition: top 1s, color 1s;
+    -o-transition: top 1s, color 1s;
+
+}
+    
 #activePolls {
     display: flex;
     flex-direction: column;
