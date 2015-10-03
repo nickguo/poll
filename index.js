@@ -34,7 +34,6 @@ io.on('connection', function(socket){
   console.log('connected ' + socket.id);
 
   socket.on('vote', function(vote){
-    // TODO: make sure not owner of poll
     // if vote.id != socket.id, emit and increme
     if(vote.id in polls && vote.id != socket.id) {
       if (!('voters' in polls[vote.id])) {
@@ -44,7 +43,7 @@ io.on('connection', function(socket){
       if (!(socket.id in polls[vote.id]['voters'])) {
         polls[vote.id]['options'][vote.option]++;
         polls[vote.id]['voters'][socket.id] = vote.option;
-        io.emit('update_vote', vote);
+        io.emit('update_vote', vote)
       }
     }
   });
