@@ -1,11 +1,18 @@
-function makePollString(poll) {
-  var pollString = '<div class="activePollMenu">'
-  pollString += poll['title'] + "<br>"
+function makePoll(socket, poll) {
+  var pollDiv = $('<div id="' + poll.id + '" class="activePollMenu"></div>');
+  pollDiv.append(poll['title'] + "<br>");
   for (var key in poll['options']) {
-    pollString += key + ": " + poll['options'][key];
+    pollDiv.append(key + ": ");
+    $('<button>')
+      .attr('id', poll.id + key)
+      .text(poll['options'][key])
+      .appendTo(pollDiv)
+      .click(function() {
+          socket.emit('vote', { 'id': poll.id, 'option': key })});
+    pollDiv.append("<br>");
   }
-  pollString += '</div>';
-  return pollString;
+  $("#activePolls").append(pollDiv);
+  console.log('button:' + $('#'+poll.id+"ans 1").text()==0);
 }
 
 $(document).ready(function() {
@@ -27,17 +34,19 @@ $(document).ready(function() {
   });
   
   socket.on('new_poll', function(newPoll) {
-    $("#activePolls").append(makePollString(newPoll));
+    makePoll(socket, newPoll);
   });
 
   socket.on('update_vote', function(vote){
-      var currentSum = parseInt($('#target').html());
-      $('#target').html(currentSum + 1);
+      console.log('button:' + $('#'+vote['id']+vote['option']).val());
+      var currentSum = parseInt($('#'+vote['id']+vote['option']).val());
+      console.log('got vote update: ' + currentSum);
+      $('#'+vote['id']+vote['option']).html(currentSum + 1);
   });
 
   socket.on('current_polls', function(currentPolls){
     for(poll in currentPolls){
-      $("#activePolls").append(makePollString(currentPolls[poll]));
+      makePoll(socket, currentPolls[poll]);
     }
   });
 
