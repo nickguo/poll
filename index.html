@@ -3,8 +3,16 @@
   <head>
     <title>Poll</title>
   <body>
-    <div id="target">0</div>
+    <!--<div id="target">0</div>
     <button id="click-box">Click Me</button>
+    -->
+    <div id="wrapper">
+        <div id="activePolls" style="float:left;width:33%;height:100vh;display:inline-block;background-color:green">
+        </div>
+        <div id="inactivePolls" style="float:right;width:66%;height:100vh;background-color:red;display:inline-block">
+            <button id="newPoll">New poll</button>
+        </div>
+    </div>
   </body>
 
 <script src="/socket.io/socket.io.js"></script>
