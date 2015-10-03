@@ -1,6 +1,7 @@
 function makePoll(socket, poll, created) {
   created = created || false;
   var pollDiv = $('<div id="' + poll.id + '" class="activePollMenu"></div>');
+
   pollDiv.append(poll['title'] + "<br>");
   for (var key_original in poll['options']) {
     (function(key) {
@@ -18,7 +19,10 @@ function makePoll(socket, poll, created) {
       pollDiv.append("<br>");
     }(key_original));
   }
-  $(".activePolls").append(pollDiv);
+  $("#pollWrapper").prepend(pollDiv);
+  pollDiv.css("display", "none");
+  pollDiv.css("height", "80px");
+  pollDiv.fadeIn("slow", function(){});
 }
 
 $(document).ready(function() {
@@ -84,9 +88,6 @@ $(document).ready(function() {
     console.log("option 2 is: " + $("#option2").val());
   });
 
-});
-
-
 var plusPulledDown = false;
 
 $("#addPollDiv").click(function(){
@@ -105,8 +106,24 @@ $("#addPollDiv").click(function(){
         $(".addPollForm").css("border-bottom-color", "white");
         $(".addPollForm").css("border-top-color", "white");
         $("#createNewPollForm").fadeOut("slow", function(){});
-
+        console.log("button clicked!");
+        var pollData = 
+          {
+            'id': socket.id,
+            'title': $('#title').val(),
+            'options': {
+              'ans 1': $('#option1').val(),
+              'ans 2': $('#option2').val(),
+              'ans 3': $('#option3').val() 
+            }
+          };
+        socket.emit('new_poll', pollData);
         plusPulledDown = false;
     }
 });
+
+});
+
+
+
 

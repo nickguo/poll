@@ -40,8 +40,8 @@
     } 
   </style>
 
-  <body style="width:100%">
-    <div class="activePolls mdl-card mdl-shadow--4dp" style="100%;width:33%">
+  <body style="width:100%;">
+    <div class="activePolls mdl-card mdl-shadow--4dp" style="100%;width:50%;left:25%">
       <div class="mdl-card__title">
         <h1 class="mdl-card__title-text ">
           Poll Feed
@@ -76,11 +76,11 @@
       <div id="addPollDiv" style="height:50px;position:relative">
         <span class="glyphicon glyphicon-plus" id="addPollButton"></span>
       </div>
+      <div id="pollWrapper" style="width:100%">
+        <!-- Appended polls open here -->
+      </div>
     </div>
       
-    <div style="position: fixed; left: 33%; width: 67%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center">
-      
-    </div>
   </body>
 
 <script src="/socket.io/socket.io.js"></script>

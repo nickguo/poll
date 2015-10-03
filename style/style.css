@@ -10,10 +10,13 @@
     flex-direction: row;
     justify-content: center;
     width:calc(100% - 2px);
-    height:80px;
-    color: white;
-    border-top: 1px solid #ff8f00;
+    height:0px;
+    color: black;
     border-bottom: 1px solid #ff8f00;
+    transition: height 1s, background-color 1s, border-bottom-color 1s, border-top-color 1s;
+    -moz-transition: height 1s, background-color 1s, border-bottom-color 1s, border-top-color 1s; /* Firefox 4 */
+    -webkit-transition: height 1s, background-color 1s, border-bottom-color 1s, border-top-color 1s; /* Safari and Chrome */
+    -o-transition: height 1s, background-color 1s, border-bottom-color 1s, border-top-color 1s; /* Opera */
 }
 
 #addPollDiv {
