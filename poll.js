@@ -35,21 +35,6 @@ $(document).ready(function() {
   var socket = io();
   var activePolls;
 
-  $('#newPoll').click(function(){
-    console.log("button clicked!");
-    var pollData = 
-      {
-        'id': socket.id,
-        'title': $('#title').val(),
-        'options': {
-          'ans 1': $('#option1').val(),
-          'ans 2': $('#option2').val(),
-          'ans 3': $('#option3').val() 
-        }
-      };
-    socket.emit('new_poll', pollData);
-  });
-  
   socket.on('new_poll', function(newPoll) {
     console.log("poll received");
     makePoll(socket, newPoll, newPoll.id == socket.id);
@@ -57,7 +42,9 @@ $(document).ready(function() {
 
   socket.on('timeout_poll', function(timeoutPoll) {
     console.log("timeout poll received");
-    $('#' + timeoutPoll.id).remove();
+    $('#' + timeoutPoll.id).fadeOut(1000, function() {
+      $('#' + timeoutPoll.id).remove();
+    });
   });
 
   // voted {} keeps track of which polls this socket has voted for
@@ -117,12 +104,10 @@ $("#addPollDiv").click(function(){
           {
             'id': socket.id,
             'title': $('#title').val(),
-            'options': {
-              'ans 1': $('#option1').val(),
-              'ans 2': $('#option2').val(),
-              'ans 3': $('#option3').val() 
-            }
+            'options': {}
           };
+        pollData['options'][$('#option1').val()] = 0;
+        pollData['options'][$('#option2').val()] = 0;
         socket.emit('new_poll', pollData);
         plusPulledDown = false;
     }
