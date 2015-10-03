@@ -14,8 +14,8 @@ app.get('/poll.js', function(req, res){
 });
 
 
-activePolls = []
-inactivePolls = []
+activePolls = [{'title': 'Gucci or LV!'}]
+inactivePolls = [];
 
 io.on('connection', function(socket){
   console.log('connected ' + socket.id);

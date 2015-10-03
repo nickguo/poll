@@ -13,7 +13,11 @@ $(document).ready(function() {
   });
 
   socket.on('current_polls', function(currentPolls){
-      console.log('currentPolls: ' + currentPolls);
+    for(poll in currentPolls['activePolls']){
+      $("#activePolls").append('<div class="activePollMenu">' 
+            + currentPolls['activePolls'][poll]['title'] 
+            + '</div>');
+    }
   });
 
 });
