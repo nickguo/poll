@@ -2,6 +2,7 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="./style/style.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/readable/bootstrap.min.css">
     <title>Poll</title>
   </head>
   <body>
@@ -18,17 +19,30 @@
             <!-- Future polls are appended here -->    
         </div>
         <div id="rightContainer">
-          <div id="inactivePolls">
-            Inactive polls.
+          <div id="newPollForm">
+            <form class="form-horizontal" id="pollForm">
+              <fieldset>
+              <legend>Legend</legend>
+                <div class="form-group">
+                  <label class="control-label" for="formTitle">Form Title</label>
+                  <input class="form-control" id="title" name="title" type="text">
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="option1">Option 1</label>
+                  <input class="form-control" id="option1" name="option1" type="text">
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="option2">Option 2</label>
+                  <input class="form-control" id="option2" name="option2" type="text">
+                </div>
+                <button type="submit" id="newPoll">
+                  New poll
+                </button>
+              </fieldset>
+            </form>
           </div>
-          <div id="newPollForm" style="display: none;">
-            This is a new poll form.
-          </div>
-        </div>
+        </div>    
         
-        <button id="newPoll">
-          New poll
-        </button>
     </div>
   </body>
 
