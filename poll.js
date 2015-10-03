@@ -23,6 +23,7 @@ $(document).ready(function() {
   var activePolls;
 
   $('#newPoll').click(function(){
+    console.log("button clicked!");
     var pollData = 
       {
         'id': socket.id,

@@ -24,7 +24,7 @@ app.get('/poll.js', function(req, res){
         }
       };
 
-    var vote = {optionName}kkk
+    var vote = {optionName}
       */
 
 
