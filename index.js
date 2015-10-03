@@ -10,17 +10,23 @@ app.get('/poll.js', function(req, res){
   res.sendFile(__dirname + '/poll.js');
 });
 
+
+activePolls = []
+inactivePolls = []
+
 io.on('connection', function(socket){
-  console.log('connected');
+  console.log('connected ' + socket.id);
 
-  socket.on('vote', function(vote_info){
-    io.emit('vote', vote_info);
+  socket.on('vote', function(voteInfo){
+    io.emit('vote', voteInfo);
+  });
+
+  socket.on('new_poll', function(pollInfo){
 
   });
 
-  socket.on('new_poll' function(poll_info){
-
-  });
+  io.sockets.connected[socket.id].emit('current_polls',
+      { 'activePolls': activePolls, 'inactivePolls': inactivePolls });
 });
 
 http.listen(3000, function(){

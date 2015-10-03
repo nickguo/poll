@@ -12,4 +12,8 @@ $(document).ready(function() {
       $('#target').html(currentSum + 1);
   });
 
+  socket.on('current_polls', function(currentPolls){
+      console.log('currentPolls: ' + currentPolls);
+  });
+
 });
