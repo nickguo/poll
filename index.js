@@ -12,6 +12,14 @@ app.get('/poll.js', function(req, res){
 
 io.on('connection', function(socket){
   console.log('connected');
+
+  socket.on('vote', function(msg){
+    io.emit('vote', msg);
+  });
+});
+
+io.on('vote', function(socket){
+  console.log('voted');
 });
 
 http.listen(3000, function(){
