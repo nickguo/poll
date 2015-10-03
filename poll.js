@@ -1,3 +1,13 @@
+function makePollString(poll) {
+  var pollString = '<div class="activePollMenu">'
+  pollString += poll['title'] + "<br>"
+  for (var key in poll['options']) {
+    pollString += key + ": " + poll['options'][key];
+  }
+  pollString += '</div>';
+  return pollString;
+}
+
 $(document).ready(function() {
   var socket = io();
   var activePolls;
@@ -18,9 +28,7 @@ $(document).ready(function() {
   });
   
   socket.on('new_poll', function(newPoll) {
-    console.log('got new poll');
-    $("#activePolls").append('<div class=activePollMenu">'
-        + newPoll['title'] + '</div>');
+    $("#activePolls").append(makePollString(newPoll));
   });
 
   socket.on('update_vote', function(vote){
@@ -32,14 +40,7 @@ $(document).ready(function() {
     activePolls = currentPolls['activePolls'];
     inactivePolls = currentPolls['inactivePolls'];
     for(poll in activePolls){
-      var pollString = '<div class="activePollMenu">'
-      pollString += activePolls[poll]['title']
-      for (var key in activePolls[poll]['options']) {
-        console.log('option: ' + key);
-        pollString += key + ": " + activePolls[poll]['options'][key];
-      }
-      pollString += '</div>';
-      $("#activePolls").append(pollString);
+      $("#activePolls").append(makePollString(activePolls[poll]));
     }
   });
 
