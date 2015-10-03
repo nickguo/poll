@@ -36,9 +36,16 @@ io.on('connection', function(socket){
   socket.on('vote', function(vote){
     // TODO: make sure not owner of poll
     // if vote.id != socket.id, emit and increme
-    if(vote.id != socket.id) {
-      polls[vote.id]['options'][vote.option]++;
-      io.emit('update_vote', vote);
+    if(vote.id in polls && vote.id != socket.id) {
+      if (!('voters' in polls[vote.id])) {
+        polls[vote.id]['voters'] = {};
+        console.log('created voters for ' + vote.id);
+      }
+      if (!(socket.id in polls[vote.id]['voters'])) {
+        polls[vote.id]['options'][vote.option]++;
+        polls[vote.id]['voters'][socket.id] = vote.option;
+        io.emit('update_vote', vote);
+      }
     }
   });
 
@@ -53,7 +60,6 @@ io.on('connection', function(socket){
       // start timer, at timeout send out a message
       setTimeout(function() {
         delete polls[socket.id];
-
         io.emit('timeout_poll', poll);
       }, 1000 * 10);
     }
