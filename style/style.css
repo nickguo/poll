@@ -11,9 +11,37 @@
     align-items: center;
     width:calc(100% - 2px);
     height:60px;
-    color: white;
-    background-color: black;
-    border: 1px solid white;
+    color: black;
+    background-color: white;
+    /*border: 1px solid white;*/
+}
+
+.selectTab {
+    display: flex;
+    flex-direction: row;
+    float:left;
+    width: 33%;
+    height: 35px;
+    line-height: 35px;
+    justify-content: center;
+    cursor:pointer
+}
+/*
+.selectTab:hover {
+    background-color: black; !important
+    color:white; !important
+    opacity:0.6; !important 
+    cursor:pointer;
+}*/
+
+#newPollMenu {
+    display:inline-block;
+    background-color:black
+
+    transition: height 1s;
+    -moz-transition: height 1s; /* Firefox 4 */
+    -webkit-transition: height 1s; /* Safari and Chrome */
+    -o-transition: height 1s; /* Opera */
 }
 
 #activePolls {
@@ -22,7 +50,6 @@
     float:left;
     width: 33%;
     height:97vh;
-    background-color:green;
 }
 
 #activePollBanner {
@@ -32,7 +59,6 @@
     align-items: center;
     width:100%;
     height:100px;
-    background-color:yellow;
 }
 
 #inactivePolls {

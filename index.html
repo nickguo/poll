@@ -2,6 +2,9 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="./style/style.css">
+    <link rel="stylesheet" type="text/css" href="./style/bootstrap/css/bootstrap.css">
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="/style/bootstrap/js/bootstrap.js"></script>
     <title>Poll</title>
   </head>
   <body>
@@ -12,9 +15,17 @@
         <div id="activePolls">
             <div id="activePollBanner">
               <h1>
-                Active Poll Feed
+                The Feed
               </h1>
             </div>
+            <div id="tabMenu">
+                <div id="selectActive" class="selectTab" style="border-right:1px solid black;background-color:black;color:white">ACTIVE</div>
+                <div id="createNewPoll" class="selectTab">
+                    <span class="glyphicon glyphicon-plus" style="padding-top:7px"></span>
+                </div>
+                <div id="selectInactive" class="selectTab" style="border-left:1px solid black">RESULTS</div>
+            </div>
+            <div id="newPollMenu" style="height:0px">hi</div>
             <!-- Future polls are appended here -->    
         </div>
         <div id="rightContainer">
@@ -33,6 +44,5 @@
   </body>
 
 <script src="/socket.io/socket.io.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 <script src="/poll.js"></script>
 </html>
