@@ -1,52 +1,81 @@
 <!doctype html>
 <html>
   <head>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <link rel="stylesheet" type="text/css" href="./style/style.css">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/readable/bootstrap.min.css">
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.red-amber.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>Poll</title>
   </head>
+  <style>
+    .demo-card-wide.mdl-card {
+      width: 66%;
+      margin-bottom: 20px;
+      height: 30%;
+    }
+    .demo-card-wide > .mdl-card__title {
+      color: #000;
+    }
+    .demo-card-wide > .mdl-card__menu {
+      color: #fff;
+    }
+    .activePolls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: fixed;
+      width: 33%;
+      height: 100%;
+      z-index: 100;
+    }
+    .activePolls > .mdl-card_title {
+      height: 176px;
+    }
+    .activePolls > .mdl-card__title > .mdl-card__title-text {
+      font-size: 56px;
+      color: #ff8f00;
+    }
+  </style>
+
   <body>
-    <!--<div id="target">0</div>
-    <button id="click-box">Click Me</button>
-    -->
-    <div id="wrapper">
-        <div id="activePolls">
-            <div id="activePollBanner">
-              <h1>
-                Active Poll Feed
-              </h1>
-            </div>
-            <!-- Future polls are appended here -->    
-        </div>
-        <div id="rightContainer">
-          <div id="newPollForm">
-            <form class="form-horizontal" id="pollForm">
-              <fieldset>
-              <legend>Legend</legend>
-                <div class="form-group">
-                  <label class="control-label" for="formTitle">Form Title</label>
-                  <input class="form-control" id="title" name="title" type="text">
-                </div>
-                <div class="form-group">
-                  <label class="control-label" for="option1">Option 1</label>
-                  <input class="form-control" id="option1" name="option1" type="text">
-                </div>
-                <div class="form-group">
-                  <label class="control-label" for="option2">Option 2</label>
-                  <input class="form-control" id="option2" name="option2" type="text">
-                </div>
-                <button type="submit" id="newPoll">
-                  New poll
-                </button>
-              </fieldset>
-            </form>
-          </div>
-        </div>    
-        
+    <div class="activePolls mdl-card mdl-shadow--4dp">
+      <div class="mdl-card__title">
+        <h1 class="mdl-card__title-text ">
+          Poll Feed
+        </h1>
+      </div>
     </div>
+    <div style="position: fixed; left: 33%; width: 67%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end">
+
+      <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h2 class="mdl-card__title-text">Create a poll</h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="sample3" />
+            <label class="mdl-textfield__label" for="sample3">Poll Title...</label>
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+            Create
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    
+
+
+  
   </body>
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
 <script src="/poll.js"></script>
 </html>
