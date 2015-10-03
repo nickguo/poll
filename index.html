@@ -1,15 +1,20 @@
 <!doctype html>
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
     <title>Poll</title>
+  </head>
   <body>
     <!--<div id="target">0</div>
     <button id="click-box">Click Me</button>
     -->
     <div id="wrapper">
-        <div id="activePolls" style="float:left;width:33%;height:100vh;display:inline-block;background-color:green">
+        <div id="activePolls">
+            <div id="activePollBanner"><h1>Active Polls</h1></div>
+            
+            <div class="activePollMenu">Placeholder Poll</div>
         </div>
-        <div id="inactivePolls" style="float:right;width:66%;height:100vh;background-color:red;display:inline-block">
+        <div id="inactivePolls">
             <button id="newPoll">New poll</button>
         </div>
     </div>
