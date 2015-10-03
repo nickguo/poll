@@ -23,7 +23,6 @@ $(document).ready(function() {
   var activePolls;
 
   $('#newPoll').click(function(){
-    document.getElementById('newPollForm').style.display = "flex";
     var pollData = 
       {
         'id': socket.id,
@@ -51,6 +50,12 @@ $(document).ready(function() {
     for(poll in currentPolls){
       makePoll(socket, currentPolls[poll]);
     }
+  });
+
+  $("#pollForm").submit( function() {
+    console.log("title is: " + $("#title").val());
+    console.log("option 1 is: " + $("#option1").val());
+    console.log("option 2 is: " + $("#option2").val());
   });
 
 });
