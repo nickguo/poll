@@ -13,37 +13,52 @@ app.get('/poll.js', function(req, res){
   res.sendFile(__dirname + '/poll.js');
 });
 
+/*
+    var pollData = 
+      {
+        'id': socket.id,
+        'title': 'pokemon', //$('#pollName').val(),
+        'options': {
+          'name1': 0,
+          'name2': 0
+        }
+      };
 
-activePolls = [{'title': 'Gucci or LV!'}]
-inactivePolls = [];
+    var vote = {optionName}kkk
+      */
+
+
+activePolls = {};
+inactivePolls = {};
 
 io.on('connection', function(socket){
   console.log('connected ' + socket.id);
 
-  socket.on('vote', function(voteInfo){
+  socket.on('vote', function(vote){
     // TODO: make sure not owner of poll
-    // if voteInfo.id != socket.id, emit and increme
-    if(voteInfo.id != socket.id) {
-      activePolls[voteInfo.id]++;
-      io.emit('update_vote', voteInfo);
+    // if vote.id != socket.id, emit and increme
+    if(vote.id != socket.id) {
+      activePolls[vote.id]['options'][vote.option]++;
+      io.emit('update_vote', vote);
     }
   });
 
-  socket.on('new_poll', function(pollInfo) {
+  socket.on('new_poll', function(poll) {
     // only add the new poll if this socket doesn't already have a poll
-    if( !socket.id in activePolls ) {
-      activePolls[socket.id] = pollInfo;
-      io.emit('new_poll', pollInfo);
+    console.log('got new poll');
+    if( !(socket.id in activePolls) ) {
+      console.log('making new poll');
+      activePolls[socket.id] = poll;
+      io.emit('new_poll', poll);
 
       // start timer, at timeout send out a message
-      window.setTimeout(function() {
-
+      setTimeout(function() {
         // move from active to inactive
         inactivePolls[socket.id] = activePolls[socket.id];
         delete activePolls[socket.id];
 
-        io.emit('timeout_poll', pollInfo);
-      }, 1000 * 30);
+        io.emit('timeout_poll', poll);
+      }, 1000 * 10);
     }
   });
 
