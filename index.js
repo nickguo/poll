@@ -25,9 +25,14 @@ io.on('connection', function(socket){
   });
 
   socket.on('new_poll', function(pollInfo){
-
+    // only add the new poll if this socket doesn't already have a poll
+    if( !socket.id in activePolls ) {
+      activePolls[socket.id] = pollInfo;
+      io.emit('new_poll', pollInfo);
+    }
   });
 
+  // the below only emits the current polls to the new socket
   io.sockets.connected[socket.id].emit('current_polls',
       { 'activePolls': activePolls, 'inactivePolls': inactivePolls });
 });
