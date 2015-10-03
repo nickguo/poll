@@ -1,11 +1,24 @@
 Socket actions:
     connection:
         1. server "on"'s connection
-        2. server emits active/inactive poll.
+        2. server emits(creates) active/inactive poll.
+                json:{
+                    "active": []
+                    "inactive": []
+                }
         3. client "on"'s poll information and populates UI
-    new poll: 
+        
+    new_poll: 
         1. action initiated by user. [emit: client, on: server]
+                json: {
+                    poll_title,
+                    choices: [payload -> choice_title]
+                }
         2. server must update all users' UI [emit: server, on: client]
+                forward json from 1
+                
     vote:
         1. action initiated by user. [emit: client, on: server]
+                restrict voting to once per socket id
         2. server must update all users' UI [emit: server, on: client]
+            UI count locked until vote, then update until done
