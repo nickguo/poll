@@ -3,25 +3,16 @@ $(document).ready(function() {
   var activePolls;
   var inactivePolls;
 
-
-  function showNewPollForm() {
-    console.log("Showing new poll form.");
-    document.getElementById('newPollForm').style.display = "block";
-  }
-
-
-  $('#click-box').click(function(){
-      console.log('clicked');
-      socket.emit('vote', 'user voted');
-  });
-
   $('#newPoll').click(function(){
-    console.log("Showing new poll form.");
     document.getElementById('newPollForm').style.display = "flex";
     var pollData = 
       {
-        'name': $('#pollName').val(),
-        'options': []
+        'id': socket.id,
+        'title': $('#pollName').val(),
+        'options': {
+          'ans 1': 0,
+          'ans 2': 0
+        }
       };
     socket.emit('new_poll', pollData);
   });
@@ -31,8 +22,7 @@ $(document).ready(function() {
         + newPoll['title'] + '</div');
   });
 
-  socket.on('vote', function(msg){
-      console.log('got clicked');
+  socket.on('update_vote', function(msg){
       var currentSum = parseInt($('#target').html());
       $('#target').html(currentSum + 1);
   });
