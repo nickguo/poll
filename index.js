@@ -60,7 +60,7 @@ io.on('connection', function(socket){
       setTimeout(function() {
         delete polls[socket.id];
         io.emit('timeout_poll', poll);
-      }, 1000 * 30);
+      }, 1000 * 10);
     }
   });
 

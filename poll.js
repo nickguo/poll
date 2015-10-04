@@ -25,8 +25,8 @@ function makePoll(socket, poll, created) {
 
   var descWrapper = $('<div class="descriptionBox">' + poll.title + '</div>');
   var voteWrapper = $('<div class="voteBox"></div>');
-  var leftVote = $('<div class="leftVote">' + poll.options.ans1 + '</div>');
-  var rightVote = $('<div class="rightVote">' + poll.options.ans2 + '</div>');
+  var leftVote = $('<div class="leftVote">' + poll.options[0].name + '</div>');
+  var rightVote = $('<div class="rightVote">' + poll.options[1].name + '</div>');
   var leftImg = $('<div class="leftImg"></div>');
   var rightImg = $('<div class="rightImg"></div>');
 
@@ -61,21 +61,6 @@ $(document).ready(function() {
   var socket = io();
   var activePolls;
 
-  $('#newPoll').click(function(){
-    console.log("button clicked!");
-    var pollData = 
-      {
-        'id': socket.id,
-        'title': $('#title').val(),
-        'options': {
-          'ans 1': $('#option1').val(),
-          'ans 2': $('#option2').val(),
-          'ans 3': $('#option3').val() 
-        }
-      };
-    socket.emit('new_poll', pollData);
-  });
-  
   socket.on('new_poll', function(newPoll) {
     console.log("poll received");
     makePoll(socket, newPoll, newPoll.id == socket.id);
@@ -83,7 +68,9 @@ $(document).ready(function() {
 
   socket.on('timeout_poll', function(timeoutPoll) {
     console.log("timeout poll received");
-    $('#' + timeoutPoll.id).remove();
+    $('#' + timeoutPoll.id).fadeOut(1000, function() {
+      $('#' + timeoutPoll.id).remove();
+    });
   });
 
   // voted {} keeps track of which polls this socket has voted for
@@ -143,15 +130,23 @@ $("#addPollDiv").click(function(){
           {
             'id': socket.id,
             'title': $('#title').val(),
-            'options': {
-              'ans1': $('#option1').val(),
-              'ans2': $('#option2').val(),
-              'ans3': $('#option3').val() 
-            }
+            'options': 
+                [
+                    {
+                        'name': $('#option1').val(),
+                        'votes': 0,
+                        'img': ""
+                    },
+                    {
+                        'name': $('#option2').val(),
+                        'votes': 0,
+                        'img': ""
+                    }
+                ]
           };
         socket.emit('new_poll', pollData);
         plusPulledDown = false;
-    }
+   }
 });
 
 });

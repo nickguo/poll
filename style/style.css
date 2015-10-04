@@ -49,9 +49,9 @@
     width: 200px;
     height:200px;
     max-width: 99%;
-    position:relative;
+    position:absolute;
     top: 10px;
-    left: calc(50% - 100px);
+    left: calc(25% - 100px);
     background-color: grey;
 }
 
@@ -59,9 +59,9 @@
     width: 200px;
     height:200px;
     max-width: 99%;
-    position:relative;
+    position:absolute;
     top: 10px;
-    left: calc(50% - 100px);
+    left: calc(75% - 100px);
     background-color: grey;
 }
 
