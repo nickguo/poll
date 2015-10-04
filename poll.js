@@ -113,7 +113,7 @@ $(document).ready(function() {
               console.log($('#' + this.id).attr('id').slice(-1));
               this.innerHTML = $('#' + this.id).attr('count');
               var percentage = 100.0 * vote["option" + $('#' + this.id).attr('id').slice(-1)] / (vote["option0"] + vote["option1"]);
-              $('.bar-' + $('#' + this.id).attr('id').slice(-1)).css("width", String(percentage) + "%");
+              $('#Bar' + $('#' + this.id).attr('id')).css("width", String(percentage) + "%");
               return this.id.match(/\d+$/);
           });
     }
@@ -121,7 +121,7 @@ $(document).ready(function() {
     else if (vote.id in voted) {
       countDiv.text(countDiv.attr('count'));
       var percentage = 100.0 * vote["option" + vote["optIndex"]] / (vote["option0"] + vote["option1"]);
-      $('.bar-' + vote["optIndex"]).css("width", String(percentage) + "%");
+      $('#Bar' + vote.id).css("width", String(percentage) + "%");
       console.log('updated countDiv');
     }
   });
