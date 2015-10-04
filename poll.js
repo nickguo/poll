@@ -159,19 +159,45 @@ $(document).ready(function() {
           //$("#addPollButton").css("color", "#ff8f00");
           plusPulledDown = true;
       } else {
-        if ($('#title').val() == '' || $('#option1').val() == '' || $('#option2').val() == '') {
-          if ($("#title").val() == '') {
+        titleVal = $('#title').val().trim();
+        option1Val = $('#option1').val().trim();
+        option2Val = $('#option2').val().trim();
+        if (titleVal == '' || option1Val == '' || option2Val == '' || option1Val == option2Val) {
+          if (titleVal == '') {
             $("#titleError").css("display", "block");
             $("#title").css("margin-bottom", "3px");
           }
-          if ($("#option1").val() == '') {
+          else {
+            $("#titleError").css("display", "none");
+            $("#title").css("margin-bottom", "20px");
+          }
+
+          if (option1Val == '') {
             $("#option1Error").css("display", "block");
             $("#option1").css("margin-bottom", "3px");
           }
-          if ($("#option2").val() == '') {
+          else {
+            $("#option1Error").css("display", "none");
+            $("#option1").css("margin-bottom", "20px");
+          }
+          if (option2Val == '') {
+            console.log("this is happening");
             $("#option2Error").css("display", "block");
             $("#option2").css("margin-bottom", "3px");
           } 
+          else {
+            $("#option2Error").css("display", "none");
+            $("#option2").css("margin-bottom", "20px");
+          }
+
+          if (option1Val == option2Val && option1Val != '') {
+            $("#option2SameError").css("display", "block");
+            $("#option2").css("margin-bottom", "3px");
+          }
+          else {
+            $("#option2SameError").css("display", "none");
+            $("#option2").css("margin-bottom", "20px");
+          }
         }
         else {
           $(".addPollForm").css("height", "0px");
@@ -204,6 +230,7 @@ $(document).ready(function() {
           $("#option1Error").css("display", "none");
           $("#option1Div").css("padding-bottom", "20px");
           $("#option2Error").css("display", "none");
+          $("#option2SameError").css("display", "none");
           $("#option2Div").css("padding-bottom", "20px");
         }
      }
