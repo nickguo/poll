@@ -15,32 +15,17 @@ app.get('/poll.js', function(req, res){
   res.sendFile(__dirname + '/poll.js');
 });
 
-/*
-    var pollData = 
-      {
-        'id': socket.id,
-        'title': 'pokemon', //$('#pollName').val(),
-        'options': {
-          'name1': 0,
-          'name2': 0
-        }
-      };
-
-    var vote = {optionName}
-      */
-
-
 polls = {};
 
 io.on('connection', function(socket){
   console.log('connected ' + socket.id);
 
   socket.on('vote', function(vote){
+    // TODO: FIX VOTE
     // if vote.id != socket.id, emit and increme
     if(vote.id in polls){ //&& vote.id != socket.id) {
       if (!('voters' in polls[vote.id])) {
         polls[vote.id]['voters'] = {};
-        console.log('created voters for ' + vote.id);
       }
       if (!(socket.id in polls[vote.id]['voters'])) {
         polls[vote.id]['options'][vote.optIndex]['votes']++;
@@ -52,26 +37,24 @@ io.on('connection', function(socket){
 
   socket.on('new_poll', function(poll) {
     // only add the new poll if this socket doesn't already have a poll
-    console.log('got new poll');
     if( !(socket.id in polls) ) {
-      console.log('making new poll');
       polls[socket.id] = poll;
       asyncCalls = []
-      for (option in poll.options) {
-        (function(opt) {
+      for (index in poll.options) {
+        (function(i) {
           asyncCalls.push(function(callback) {
-            request('https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=' + opt,
+            request('https://ajax.googleapis.com/ajax/services/search/images?v=1.1&q=' + poll.options[i].name,
               function(error, response, body) {
                 body = JSON.parse(body);
                 imageURL = body.responseData.results[0].url;
-                console.log(imageURL);
                 callback(false, imageURL);
             })});
-          }(option));
+          }(index));
       }
       async.parallel(asyncCalls, function(err, results) {
-        poll.options[0] = results[0];
-        poll.options[1] = results[1];
+        poll.options[0].img = results[0];
+        poll.options[1].img = results[1];
+        console.log(poll);
         io.emit('new_poll', poll);
       });
 
@@ -79,7 +62,7 @@ io.on('connection', function(socket){
       setTimeout(function() {
         delete polls[socket.id];
         io.emit('timeout_poll', poll);
-      }, 1000 * 100);
+      }, 1000 * 15);
     }
   });
 
