@@ -69,7 +69,7 @@ io.on('connection', function(socket){
       setTimeout(function() {
         delete polls[socket.id];
         io.emit('timeout_poll', poll);
-      }, 1000 * 30);
+      }, 1000 * 60);
     }
   });
 
@@ -77,7 +77,7 @@ io.on('connection', function(socket){
   io.sockets.connected[socket.id].emit('current_polls', polls);
 });
 
-http.listen(3000, function(){
+http.listen(80, function(){
   console.log('listening on *:3000');
 });
 
