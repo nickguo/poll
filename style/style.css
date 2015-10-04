@@ -1,3 +1,16 @@
+@font-face {
+    font-family: 'Roboto_Thin';
+    src: url('./fonts/roboto_thin_macroman/Roboto-Thin-webfont.eot');
+    src: url('./fonts/roboto_thin_macroman/Roboto-Thin-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./fonts/roboto_thin_macroman/Roboto-Thin-webfont.woff') format('woff'),
+         url('./fonts/roboto_thin_macroman/Roboto-Thin-webfont.ttf') format('truetype'),
+         url('./fonts/roboto_thin_macroman/Roboto-Thin-webfont.svg#RobotoThin') format('svg');
+    font-weight: 200;
+    font-style: normal;
+}
+
+
+
 #wrapper {
     display: flex;
     width: 100%;
@@ -28,7 +41,6 @@
     display:inline-block;
     width: 10px;
     height: 270px;
-    background-color:green;
 }
 .descriptionBox {
     width:100%;
@@ -36,7 +48,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #ff8f00;
+    border-bottom: 2px solid #ff8f00;
+    font-family: Roboto_Thin;
 }
 
 .voteBox {
@@ -55,7 +68,7 @@ img {
     height:200px;
     max-width: 99%;
     position:absolute;
-    top: 10px;
+    top: 20px;
     left: calc(25% - 100px);
     background-color: grey;
 }
@@ -65,7 +78,7 @@ img {
     height:200px;
     max-width: 99%;
     position:absolute;
-    top: 10px;
+    top: 20px;
     left: calc(75% - 100px);
     background-color: grey;
 }
@@ -74,8 +87,8 @@ img {
     width:50%;
     height:100%;
     float:left;
-    border-right: 1px solid black;
     display:inline-block;
+    font-family: Roboto_Thin;
 
 }
 
@@ -84,6 +97,7 @@ img {
     height:100%;
     float:right;
     display:inline-block;
+    font-family: Roboto_Thin;
 }
 
 .leftLabel {
