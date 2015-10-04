@@ -21,7 +21,7 @@
 .activePollMenu {
     display:inline-block;
     width:100%;
-    height:270px;
+    height:300px;
     color: black;
     border-bottom: 1px solid #ff8f00;
     transition: height 1s, background-color 1s, border-bottom-color 1s, border-top-color 1s;
@@ -54,8 +54,10 @@
 
 .voteBox {
     width:100%;
-    height:220px;
-    position:absolute;
+    height: 240px;
+    position: absolute;
+    display: flex;
+    flex-direction: column; 
 }
 
 img {
@@ -64,12 +66,19 @@ img {
     margin: auto;
 }
 
+.optionText {
+    background-color:pink;
+    width:200px;
+    height:40px;
+    display:inline-block;
+}
+
 .leftImg {
     width: 200px;
     height:200px;
     max-width: 99%;
-    position:absolute;
-    top: 20px;
+    position: absolute;
+    padding-top: 40px;
     left: calc(25% - 100px);
     background-color: grey;
 }
@@ -78,8 +87,8 @@ img {
     width: 200px;
     height:200px;
     max-width: 99%;
-    position:absolute;
-    top: 20px;
+    position: absolute;
+    padding-top: 40px;
     left: calc(75% - 100px);
     background-color: grey;
 }
@@ -87,7 +96,6 @@ img {
 .leftVote {
     width:50%;
     height:100%;
-    float:left;
     display:inline-block;
     font-family: Roboto_Thin;
 
@@ -96,7 +104,6 @@ img {
 .rightVote {
     width:50%;
     height:100%;
-    float:right;
     display:inline-block;
     font-family: Roboto_Thin;
 }
