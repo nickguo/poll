@@ -45,6 +45,11 @@
     position:absolute;
 }
 
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
 .leftImg {
     width: 200px;
     height:200px;
