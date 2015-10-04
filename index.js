@@ -5,6 +5,13 @@ var io = require('socket.io')(http);
 var request = require('request');
 var async = require('async');
 
+var ibmbluemix = require('ibmbluemix');
+
+var config = {
+  applicationRoute: 'team-kiwi.mybluemix.net',
+  applicationId: 'team_kiwi'
+}
+
 app.use("/style", express.static(__dirname + '/style'));
 
 app.get('/', function(req, res){
@@ -77,7 +84,9 @@ io.on('connection', function(socket){
   io.sockets.connected[socket.id].emit('current_polls', polls);
 });
 
-http.listen(80, function(){
+var port = process.env.VCAP_APP_PORT  || 1200;
+
+http.listen(port, function(){
   console.log('listening on *:3000');
 });
 
