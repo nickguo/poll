@@ -26,7 +26,7 @@ function makePoll(socket, poll, created) {
   });
 
   var leftPercentage = 0;
-  var leftBar = $("<br><div class='progress'><div class='leftBar bar-0 progress-bar progress-bar-success' style='width: '" + leftPercentage + ";'></div></div>")
+  var leftBar = $("<br><div class='progress'><div class='leftBar bar-0 progress-bar-reverse progress-bar-success' style='width: '" + leftPercentage + ";'></div></div>")
 
   var rightPercentage = 0;
   var rightBar = $("<br><div class='progress'><div class='rightBar bar-1 progress-bar progress-bar-warning' style='width: '" + rightPercentage + "%;'></div></div>");

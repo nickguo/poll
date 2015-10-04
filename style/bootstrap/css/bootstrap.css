@@ -5207,6 +5207,14 @@ a.thumbnail.active {
        -o-animation: progress-bar-stripes 2s linear infinite;
           animation: progress-bar-stripes 2s linear infinite;
 }
+
+.progress.active-reverse .progress-bar-reverse,
+.progress-bar.active-reverse {
+  -webkit-animation: reverse progress-bar-stripes 2s linear infinite;
+       -o-animation: reverse progress-bar-stripes 2s linear infinite;
+          animation: reverse progress-bar-stripes 2s linear infinite;
+}
+
 .progress-bar-success {
   background-color: #5cb85c;
 }
