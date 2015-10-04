@@ -41,8 +41,8 @@ io.on('connection', function(socket){
         console.log('created voters for ' + vote.id);
       }
       if (!(socket.id in polls[vote.id]['voters'])) {
-        polls[vote.id]['options'][vote.option]++;
-        polls[vote.id]['voters'][socket.id] = vote.option;
+        polls[vote.id]['options'][vote.optIndex]['votes']++;
+        polls[vote.id]['voters'][socket.id] = vote.optIndex;
         io.emit('update_vote', vote)
       }
     }
@@ -60,7 +60,7 @@ io.on('connection', function(socket){
       setTimeout(function() {
         delete polls[socket.id];
         io.emit('timeout_poll', poll);
-      }, 1000 * 10);
+      }, 1000 * 100);
     }
   });
 

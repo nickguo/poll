@@ -27,15 +27,22 @@ function makePoll(socket, poll, created) {
   var voteWrapper = $('<div class="voteBox"></div>');
   var leftVote = $('<div class="leftVote">' + poll.options[0].name + '</div>');
   var rightVote = $('<div class="rightVote">' + poll.options[1].name + '</div>');
-  var leftImg = $('<div class="leftImg"></div>');
-  var rightImg = $('<div class="rightImg"></div>');
+  var leftImg = $('<div class="leftImg" id="' + poll.id + poll.options[0].name + 'Img" optValue="' + poll.options[0].name + '"></div>');
+  var rightImg = $('<div class="rightImg" id="' + poll.id + poll.options[1].name + 'Img" optValue="' + poll.options[1].name + '"></div>');
+  var leftCount = $('<div class="leftCount" id="' + poll.id + poll.options[0].name + 'Count"></div>');
+  var rightCount = $('<div class="rightCount" id="' + poll.id + poll.options[1].name + 'Count"></div>');
 
 /*  var leftLabel = $('<div class="leftLabel"></div>');
   var leftCounter = $('<div class="leftCounter"></div>');
   var rightLabel = $('<div class="rightLabel"></div>');
   var rightCounter = $('<div class="rightCounter"></div>');  */
 
-
+  leftImg.click(function(){
+    socket.emit('vote', { 'id': $(event.target).attr("id"), 'option': $(event.target).attr("optValue"), 'voter': socket.id , 'optIndex': 0});
+  });
+  rightImg.click(function(){
+    socket.emit('vote', { 'id': $(event.target).attr("id"), 'option': $(event.target).attr("optValue"), 'voter': socket.id , 'optIndex': 1});
+  });
 
 
 
@@ -77,8 +84,9 @@ $(document).ready(function() {
   voted = {}
   socket.on('update_vote', function(vote){
     console.log('got update');
-    var button = document.getElementById(vote.id + vote.option);
-    var currentSum = parseInt(button.value);
+    var button = document.getElementById(vote.id + vote.option + "Count");
+    var currentSum = parseInt(button.innerHTML);
+
     button.value = currentSum + 1;
     // check if this poll has just been voted for by this socket
     if (!(vote.id in voted) && (vote.id == socket.id || vote.voter == socket.id)) {
@@ -108,6 +116,8 @@ $(document).ready(function() {
   });
 
 var plusPulledDown = false;
+
+
 
 $("#addPollDiv").click(function(){
     if(plusPulledDown == false) {
