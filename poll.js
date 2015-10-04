@@ -43,12 +43,15 @@ $(document).ready(function() {
   var socket = io();
   var activePolls;
 
-  socket.on('new_poll', function(newPoll) {
-    makePoll(socket, newPoll, newPoll.id == socket.id);
-  });
-
   // voted {} keeps track of which polls this socket has voted for
   voted = {}
+
+  socket.on('new_poll', function(newPoll) {
+    makePoll(socket, newPoll, newPoll.id == socket.id);
+    if (newPoll.id == socket.id) {
+      voted[socket.id] = true;
+    }
+  });
 
   socket.on('timeout_poll', function(timeoutPoll) {
     $('#' + timeoutPoll.id).fadeOut(1000, function() {
@@ -66,7 +69,7 @@ $(document).ready(function() {
 
     countDiv.attr('count', currentSum + 1);
     // check if this poll has just been voted for by this socket
-    if (!(vote.id in voted) && (vote.id == socket.id || vote.voter == socket.id)) {
+    if (!(vote.id in voted) && (vote.voter == socket.id)) {
       voted[vote.id] = true;
       $('div[id^="' + vote.id +'Count"]').filter(
           function(){
@@ -76,7 +79,8 @@ $(document).ready(function() {
     }
     // otherwise only update the button if the poll's been voted for
     else if (vote.id in voted) {
-      countDiv.innerHTML = countDiv.value
+      countDiv.text(countDiv.attr('count'));
+      console.log('updated countDiv');
     }
   });
 
