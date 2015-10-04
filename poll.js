@@ -138,6 +138,6 @@ $(document).ready(function() {
 
 });
 
-
-
-
+$('#addPollDiv').click(function() {
+  $('#addPollButton').toggleClass('fa-caret-square-o-down').toggleClass('fa-plus-square');
+});
