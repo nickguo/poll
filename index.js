@@ -31,8 +31,8 @@ io.on('connection', function(socket){
       if (!(socket.id in polls[vote.id]['voters'])) {
         polls[vote.id]['options'][vote.optIndex]['votes']++;
         polls[vote.id]['voters'][socket.id] = vote.optIndex;
-        vote["option0"] =  polls[vote.id][options][0].votes;
-        vote["option1"] =  polls[vote.id][options][1].votes;
+        vote["option0"] =  polls[vote.id]["options"][0].votes;
+        vote["option1"] =  polls[vote.id]["options"][1].votes;
         io.emit('update_vote', vote);
       }
     }
@@ -42,7 +42,7 @@ io.on('connection', function(socket){
     // only add the new poll if this socket doesn't already have a poll
     if( !(socket.id in polls) ) {
       polls[socket.id] = poll;
-      asyncCalls = []
+      asyncCalls = [];
       for (index in poll.options) {
         (function(i) {
           asyncCalls.push(function(callback) {
