@@ -47,14 +47,18 @@ $(document).ready(function() {
     makePoll(socket, newPoll, newPoll.id == socket.id);
   });
 
+  // voted {} keeps track of which polls this socket has voted for
+  voted = {}
+
   socket.on('timeout_poll', function(timeoutPoll) {
     $('#' + timeoutPoll.id).fadeOut(1000, function() {
       $('#' + timeoutPoll.id).remove();
+      if (timeoutPoll.id in voted) {
+        delete voted[timeoutPoll.id]
+      }
     });
   });
 
-  // voted {} keeps track of which polls this socket has voted for
-  voted = {}
   socket.on('update_vote', function(vote){
     var countDiv = $('#' + vote.id + "Count" + vote.option);
     var currentSum = parseInt(countDiv.attr('count'));
