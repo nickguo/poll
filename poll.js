@@ -13,8 +13,8 @@ function makePoll(socket, poll, created) {
   var rightVote = $('<div class="rightVote">' + poll.options[1].name + '</div>');
   var leftImg = $('<div class="leftImg" id="' + poll.id + poll.options[0].name + 'Img" optValue="' + poll.options[0].name + '"><img src="' + poll.options[0].img + '"></div>');
   var rightImg = $('<div class="rightImg" id="' + poll.id + poll.options[1].name + 'Img" optValue="' + poll.options[1].name + '"><img src="' + poll.options[1].img + '"></div>');
-  var leftCount = $('<div class="leftCount" id="' + poll.id + poll.options[0].name + 'Count"></div>');
-  var rightCount = $('<div class="rightCount" id="' + poll.id + poll.options[1].name + 'Count"></div>');
+  var leftCount = $('<div class="leftCount" value="0" id="' + poll.id + poll.options[0].name + 'Count">0</div>');
+  var rightCount = $('<div class="rightCount" value="0" id="' + poll.id + poll.options[1].name + 'Count">0</div>');
 
   leftImg.click(function(){
     socket.emit('vote', { 'id': $(event.target).attr("id"), 'option': $(event.target).attr("optValue"), 'voter': socket.id , 'optIndex': 0});
@@ -34,7 +34,9 @@ function makePoll(socket, poll, created) {
   voteWrapper.append(leftVote);
   voteWrapper.append(rightVote);
   leftVote.append(leftImg);
+  leftVote.append(leftCount);
   rightVote.append(rightImg);
+  rightVote.append(rightCount);
 }
 
 $(document).ready(function() {

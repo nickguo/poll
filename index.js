@@ -46,12 +46,17 @@ io.on('connection', function(socket){
             request('https://ajax.googleapis.com/ajax/services/search/images?v=1.1&q=' + poll.options[i].name,
               function(error, response, body) {
                 body = JSON.parse(body);
-                imageURL = body.responseData.results[0].url;
+                try {
+                  imageURL = body.responseData.results[0].url;
+                } catch (ex) {
+                  imageURL = 'http://photodocumentor.com/wp-content/uploads/rulers/unavailable.gif'
+                }
                 callback(false, imageURL);
             })});
           }(index));
       }
       async.parallel(asyncCalls, function(err, results) {
+        // save the image URLs into the poll
         poll.options[0].img = results[0];
         poll.options[1].img = results[1];
         console.log(poll);
