@@ -25,6 +25,12 @@ function makePoll(socket, poll, created) {
     socket.emit('vote', { 'id': poll.id, 'option': poll.options[1].name, 'voter': socket.id , 'optIndex': 1});
   });
 
+  var leftPercentage = 0;
+  var leftBar = $("<br><div class='progress'><div class='leftBar progress-bar progress-bar-success' style='width: '" + leftPercentage + ";'></div></div>")
+
+  var rightPercentage = 0;
+  var rightBar = $("<br><div class='progress'><div class='rightBar progress-bar progress-bar-warning' style='width: '" + rightPercentage + "%;'></div></div>");
+
   pollDiv.css("display", "none");
   pollDiv.fadeIn("slow", function(){});
   pollDiv.append(cardWrapper);
@@ -36,9 +42,11 @@ function makePoll(socket, poll, created) {
   leftImg.prepend(leftOpt);
   leftImg.append(leftCount);
   leftVote.append(leftImg);
+  leftImg.append(leftBar);
   rightVote.append(rightImg);
   rightImg.prepend(rightOpt);
   rightImg.append(rightCount);
+  rightImg.append(rightBar);
 }
 
 $(document).ready(function() {
