@@ -45,7 +45,7 @@ function makePoll(socket, poll, created) {
   var colorPairing = colorPairs[Math.floor((Math.random() * colorPairs.length))];
 
   var leftPercentage = 0;
-  var leftBar = $("<br><div class='progress' style='background-color:" + colorPairing[0] + "'><div class='leftBar bar-0 progress-bar progress-bar-info' style='width: '" + leftPercentage + ";background-color:" + colorPairing[0] + "'></div></div>")
+  var leftBar = $("<br><div class='progress' style='background-color:" + colorPairing[0] + "'><div class='leftBar bar-0 progress-bar progress-bar-info' id='" + "Bar" + poll.id + "' style='width: '" + leftPercentage + ";background-color:" + colorPairing[0] + "'></div></div>")
 
   pollDiv.css("display", "none");
   pollDiv.fadeIn("slow", function(){});
