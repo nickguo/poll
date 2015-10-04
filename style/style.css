@@ -6,11 +6,9 @@
 }
 
 .activePollMenu {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    display:inline-block;
     width:100%;
-    height:0px;
+    height:270px;
     color: black;
     border-bottom: 1px solid #ff8f00;
     transition: height 1s, background-color 1s, border-bottom-color 1s, border-top-color 1s;
@@ -19,25 +17,99 @@
     -o-transition: height 1s, background-color 1s, border-bottom-color 1s, border-top-color 1s; /* Opera */
 }
 
-.voteBox {
-    width:160px;
-    height:80px;
-    margin-left:auto;
-    margin-right:0;
-    background-color:
+.cardWrapper {
+    float:left;
+    display:inline-block;
+    width: calc(100% - 20px);
+    height: 300px;
+}
+.indicatorWrapper {
+    float:left;
+    display:inline-block;
+    width: 10px;
+    height: 270px;
+    background-color:green;
+}
+.descriptionBox {
+    width:100%;
+    height:50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #ff8f00;
 }
 
-.yesVote {
-    width:80px;
-    height:80px;
+.voteBox {
+    width:100%;
+    height:220px;
+    position:absolute;
+}
+
+.leftImg {
+    width: 200px;
+    height:200px;
+    max-width: 99%;
+    position:absolute;
+    top: 10px;
+    left: calc(25% - 100px);
+    background-color: grey;
+}
+
+.rightImg {
+    width: 200px;
+    height:200px;
+    max-width: 99%;
+    position:absolute;
+    top: 10px;
+    left: calc(75% - 100px);
+    background-color: grey;
+}
+
+.leftVote {
+    width:50%;
+    height:100%;
     float:left;
+    border-right: 1px solid black;
+    display:inline-block;
+
+}
+
+.rightVote {
+    width:50%;
+    height:100%;
+    float:right;
+    display:inline-block;
+}
+
+.leftLabel {
+    width:25px;
+    height:100%;
+    float:left;
+    display:inline-block;
     background-color:green;
 }
 
-.noVote {
-    width:80px;
-    height:80px;
+.leftCounter {
+    width:calc(100% - 25px);
+    height:100%;
     float:right;
+    display:inline-block;
+    background-color:blue;
+}
+
+.rightLabel {
+    width:25px;
+    height:100%;
+    float:right;
+    display:inline-block;
+    background-color:yellow;
+}
+
+.rightCounter {
+    width:calc(100% - 25px);
+    height:100%;
+    float:left;
+    display:inline-block;
     background-color:red;
 }
 
