@@ -9,12 +9,14 @@ function makePoll(socket, poll, created) {
 
   var descWrapper = $('<div class="descriptionBox">' + poll.title + '</div>');
   var voteWrapper = $('<div class="voteBox"></div>');
-  var leftVote = $('<div class="leftVote">' + poll.options[0].name + '</div>');
-  var rightVote = $('<div class="rightVote">' + poll.options[1].name + '</div>');
-  var leftImg = $('<div class="leftImg" id="' + poll.id + poll.options[0].name + 'Img" optValue="' + poll.options[0].name + '"><img src="' + poll.options[0].img + '"></div>');
-  var rightImg = $('<div class="rightImg" id="' + poll.id + poll.options[1].name + 'Img" optValue="' + poll.options[1].name + '"><img src="' + poll.options[1].img + '"></div>');
+  var leftVote = $('<div class="leftVote"></div>');
+  var rightVote = $('<div class="rightVote"></div>');
+  var leftImg = $('<div class="leftImg" id="' + poll.id + poll.options[0].name + 'Img" optValue="' + poll.options[0].name + '"><img src="' + poll.options[0].img + '" style="width:200px;height:200px"></div>');
+  var rightImg = $('<div class="rightImg" id="' + poll.id + poll.options[1].name + 'Img" optValue="' + poll.options[1].name + '"><img src="' + poll.options[1].img + '" style="width:200px;height:200px"></div>');
   var leftCount = $('<div class="leftCount" count="0" id="' + poll.id + 'Count' + poll.options[0].name + '">' + (created ? poll.options[0].votes : 'X') + '</div>');
   var rightCount = $('<div class="rightCount" count="0" id="' + poll.id + 'Count' + poll.options[1].name + '">' + (created ? poll.options[0].votes : 'X') + '</div>');
+  var leftOpt = $('<div class="optionName">' + poll.options[0].name + '</div>');
+  var rightOpt = $('<div class="optionName">' + poll.options[1].name + '</div>');
 
   leftImg.click(function(){
     socket.emit('vote', { 'id': poll.id, 'option': poll.options[0].name, 'voter': socket.id , 'optIndex': 0});
@@ -25,18 +27,18 @@ function makePoll(socket, poll, created) {
 
   pollDiv.css("display", "none");
   pollDiv.fadeIn("slow", function(){});
-  pollDiv.append(indicatorWrapperL);
   pollDiv.append(cardWrapper);
-  pollDiv.append(indicatorWrapperR);
 
   cardWrapper.append(descWrapper);
   cardWrapper.append(voteWrapper);  
   voteWrapper.append(leftVote);
   voteWrapper.append(rightVote);
+  leftImg.prepend(leftOpt);
+  leftImg.append(leftCount);
   leftVote.append(leftImg);
-  leftVote.append(leftCount);
   rightVote.append(rightImg);
-  rightVote.append(rightCount);
+  rightImg.prepend(rightOpt);
+  rightImg.append(rightCount);
 }
 
 $(document).ready(function() {
