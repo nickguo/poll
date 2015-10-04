@@ -31,12 +31,10 @@ function makePoll(socket, poll, created) {
 
   cardWrapper.append(descWrapper);
   cardWrapper.append(voteWrapper);  
-  voteWrapper.append(leftVote);
-  voteWrapper.append(rightVote);
+  voteWrapper.append(leftImg);
+  voteWrapper.append(rightImg);
   leftImg.prepend(leftOpt);
   leftImg.append(leftCount);
-  leftVote.append(leftImg);
-  rightVote.append(rightImg);
   rightImg.prepend(rightOpt);
   rightImg.append(rightCount);
 }
