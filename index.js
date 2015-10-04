@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var request = require('request');
+var async = require('async');
 
 app.use("/style", express.static(__dirname + '/style'));
 
@@ -54,7 +56,24 @@ io.on('connection', function(socket){
     if( !(socket.id in polls) ) {
       console.log('making new poll');
       polls[socket.id] = poll;
-      io.emit('new_poll', poll);
+      asyncCalls = []
+      for (option in poll.options) {
+        (function(opt) {
+          asyncCalls.push(function(callback) {
+            request('https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=' + opt,
+              function(error, response, body) {
+                body = JSON.parse(body);
+                imageURL = body.responseData.results[0].url;
+                console.log(imageURL);
+                callback(false, imageURL);
+            })});
+          }(option));
+      }
+      async.parallel(asyncCalls, function(err, results) {
+        poll.options[0] = results[0];
+        poll.options[1] = results[1];
+        io.emit('new_poll', poll);
+      });
 
       // start timer, at timeout send out a message
       setTimeout(function() {
