@@ -47,6 +47,10 @@ function makePoll(socket, poll, created) {
   var leftPercentage = 0;
   var leftBar = $("<br><div class='progress' style='background-color:" + colorPairing[0] + "'><div class='leftBar bar-0 progress-bar progress-bar-info' id='" + "Bar" + poll.id + "' style='width: '" + leftPercentage + ";background-color:" + colorPairing[0] + "'></div></div>")
 
+  if (!created) {
+    leftBar.hide();
+  }
+
   pollDiv.css("display", "none");
   pollDiv.fadeIn("slow", function(){});
   pollDiv.append(cardWrapper);
@@ -112,15 +116,16 @@ $(document).ready(function() {
           function(){
               console.log($('#' + this.id).attr('id').slice(-1));
               this.innerHTML = $('#' + this.id).attr('count');
-              var percentage = 100.0 * vote["option" + $('#' + this.id).attr('id').slice(-1)] / (vote["option0"] + vote["option1"]);
-              $('#Bar' + $('#' + this.id).attr('id')).css("width", String(percentage) + "%");
+              var percentage = 100.0 * vote["option0"] / (vote["option0"] + vote["option1"]);
+              $('#Bar' + $('#' + this.id).attr('id').replace('Count0', '')).css("width", String(percentage) + "%");
               return this.id.match(/\d+$/);
           });
+      $('.progress').show();
     }
     // otherwise only update the button if the poll's been voted for
     else if (vote.id in voted) {
       countDiv.text(countDiv.attr('count'));
-      var percentage = 100.0 * vote["option" + vote["optIndex"]] / (vote["option0"] + vote["option1"]);
+      var percentage = 100.0 * vote["option0"] / (vote["option0"] + vote["option1"]);
       $('#Bar' + vote.id).css("width", String(percentage) + "%");
       console.log('updated countDiv');
     }
