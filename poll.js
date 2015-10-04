@@ -11,10 +11,10 @@ function makePoll(socket, poll, created) {
   var voteWrapper = $('<div class="voteBox"></div>');
   var leftVote = $('<div class="leftVote"></div>');
   var rightVote = $('<div class="rightVote"></div>');
-  var leftImg = $('<div class="leftImg" id="' + poll.id + poll.options[0].name + 'Img" optValue="' + poll.options[0].name + '"><img src="' + poll.options[0].img + '" style="width:200px;height:200px"></div>');
-  var rightImg = $('<div class="rightImg" id="' + poll.id + poll.options[1].name + 'Img" optValue="' + poll.options[1].name + '"><img src="' + poll.options[1].img + '" style="width:200px;height:200px"></div>');
-  var leftCount = $('<div class="leftCount" count="0" id="' + poll.id + 'Count' + poll.options[0].name + '">' + (created ? poll.options[0].votes : '<i style="color: grey" class="fa fa-eye-slash"></i>') + '</div>');
-  var rightCount = $('<div class="rightCount" count="0" id="' + poll.id + 'Count' + poll.options[1].name + '">' + (created ? poll.options[0].votes : '<i style="color: grey" class="fa fa-eye-slash"></i>') + '</div>');
+  var leftImg = $('<div class="leftImg" id="' + poll.id + '0Img" optValue="' + poll.options[0].name + '"><img src="' + poll.options[0].img + '" style="width:200px;height:200px"></div>');
+  var rightImg = $('<div class="rightImg" id="' + poll.id + '1Img" optValue="' + poll.options[1].name + '"><img src="' + poll.options[1].img + '" style="width:200px;height:200px"></div>');
+  var leftCount = $('<div class="leftCount" count="0" id="' + poll.id + 'Count0">' + (created ? poll.options[0].votes : '<i style="color: grey" class="fa fa-eye-slash"></i>') + '</div>');
+  var rightCount = $('<div class="rightCount" count="0" id="' + poll.id + 'Count1">' + (created ? poll.options[0].votes : '<i style="color: grey" class="fa fa-eye-slash"></i>') + '</div>');
   var leftOpt = $('<div class="optionName">' + poll.options[0].name + '</div>');
   var rightOpt = $('<div class="optionName">' + poll.options[1].name + '</div>');
 
@@ -71,7 +71,7 @@ $(document).ready(function() {
   });
 
   socket.on('update_vote', function(vote){
-    var countDiv = $('#' + vote.id + "Count" + vote.option);
+    var countDiv = $('#' + vote.id + "Count" + String(vote.optIndex));
     var currentSum = parseInt(countDiv.attr('count'));
     console.log('got currentSum: ' + currentSum);
 
