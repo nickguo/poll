@@ -47,19 +47,21 @@
 
       <div class="addPollForm">
         <div id="createNewPollForm" style="display:none;">
-          <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" pattern="[0-9]*" id="title" />
+          <div class="mdl-textfield mdl-js-textfield" id="titleDiv">
+            <input class="mdl-textfield__input" type="text" id="title"/>
             <label class="mdl-textfield__label" for="title">Add title</label>
-            <span class="mdl-textfield__error">Digits only</span>
           </div>
-          <div class="mdl-textfield mdl-js-textfield">
+          <span style="font-family: Roboto_Thin; font-size: 12px; color: red; display: none;" id="titleError"> Field cannot be left blank </span>
+          <div class="mdl-textfield mdl-js-textfield" id="option1Div">
             <input class="mdl-textfield__input" type="text" id="option1" />
             <label class="mdl-textfield__label" for="option1">Add Option 1</label>
           </div>
-          <div class="mdl-textfield mdl-js-textfield">
+          <span style="font-family: Roboto_Thin; font-size: 12px; color: red; display: none;" id="option1Error"> Field cannot be left blank </span>
+          <div class="mdl-textfield mdl-js-textfield" id="option2Div">
             <input class="mdl-textfield__input" type="text" id="option2" />
             <label class="mdl-textfield__label" for="option2">Add Option 2</label>
           </div>
+          <span style="font-family: Roboto_Thin; font-size: 12px; color: red; display: none;" id="option2Error"> Field cannot be left blank </span>
         </div>
       </div>
       <div id="addPollDiv" style="height:50px;position:relative; cursor: pointer;">

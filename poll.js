@@ -113,7 +113,7 @@ $(document).ready(function() {
   $("#addPollDiv").click(function(){
       if(plusPulledDown == false) {
           //$(".addPollForm").css("display", "inline-block");
-          $(".addPollForm").css("height", "180px");
+          $(".addPollForm").css("height", "220px");
           $(".addPollForm").css("border-bottom-color", "#ff8f00");
           $(".addPollForm").css("border-top-color", "#ff8f00");
          // $("#addPollDiv").css("top", "200px");
@@ -122,6 +122,21 @@ $(document).ready(function() {
           //$("#addPollButton").css("color", "#ff8f00");
           plusPulledDown = true;
       } else {
+        if ($('#title').val() == '' || $('#option1').val() == '' || $('#option2').val() == '') {
+          if ($("#title").val() == '') {
+            $("#titleError").css("display", "block");
+            $("#titleDiv").css("padding-bottom", "3px");
+          }
+          if ($("#option1").val() == '') {
+            $("#option1Error").css("display", "block");
+            $("#option1Div").css("padding-bottom", "3px");
+          }
+          if ($("#option2").val() == '') {
+            $("#option2Error").css("display", "block");
+            $("#option2Div").css("padding-bottom", "3px");
+          } 
+        }
+        else {
           $(".addPollForm").css("height", "0px");
           $(".addPollForm").css("border-bottom-color", "white");
           $(".addPollForm").css("border-top-color", "white");
@@ -147,6 +162,13 @@ $(document).ready(function() {
             };
           socket.emit('new_poll', pollData);
           plusPulledDown = false;
+          $("#titleError").css("display", "none");
+          $("#titleDiv").css("padding-bottom", "20px");
+          $("#option1Error").css("display", "none");
+          $("#option1Div").css("padding-bottom", "20px");
+          $("#option2Error").css("display", "none");
+          $("#option2Div").css("padding-bottom", "20px");
+        }
      }
   });
 
