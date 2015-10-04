@@ -13,8 +13,8 @@ function makePoll(socket, poll, created) {
   var rightVote = $('<div class="rightVote"></div>');
   var leftImg = $('<div class="leftImg" id="' + poll.id + poll.options[0].name + 'Img" optValue="' + poll.options[0].name + '"><img src="' + poll.options[0].img + '" style="width:200px;height:200px"></div>');
   var rightImg = $('<div class="rightImg" id="' + poll.id + poll.options[1].name + 'Img" optValue="' + poll.options[1].name + '"><img src="' + poll.options[1].img + '" style="width:200px;height:200px"></div>');
-  var leftCount = $('<div class="leftCount" count="0" id="' + poll.id + 'Count' + poll.options[0].name + '">' + (created ? poll.options[0].votes : 'X') + '</div>');
-  var rightCount = $('<div class="rightCount" count="0" id="' + poll.id + 'Count' + poll.options[1].name + '">' + (created ? poll.options[0].votes : 'X') + '</div>');
+  var leftCount = $('<div class="leftCount" count="0" id="' + poll.id + 'Count' + poll.options[0].name + '">' + (created ? poll.options[0].votes : '<i style="color: grey" class="fa fa-eye-slash"></i>') + '</div>');
+  var rightCount = $('<div class="rightCount" count="0" id="' + poll.id + 'Count' + poll.options[1].name + '">' + (created ? poll.options[0].votes : '<i style="color: grey" class="fa fa-eye-slash"></i>') + '</div>');
   var leftOpt = $('<div class="optionName">' + poll.options[0].name + '</div>');
   var rightOpt = $('<div class="optionName">' + poll.options[1].name + '</div>');
 
@@ -37,13 +37,11 @@ function makePoll(socket, poll, created) {
 
   cardWrapper.append(descWrapper);
   cardWrapper.append(voteWrapper);  
-  voteWrapper.append(leftVote);
-  voteWrapper.append(rightVote);
+  voteWrapper.append(leftImg);
+  voteWrapper.append(rightImg);
   leftImg.prepend(leftOpt);
   leftImg.append(leftCount);
-  leftVote.append(leftImg);
   leftImg.append(leftBar);
-  rightVote.append(rightImg);
   rightImg.prepend(rightOpt);
   rightImg.append(rightCount);
   rightImg.append(rightBar);

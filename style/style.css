@@ -80,6 +80,10 @@ img {
     position: absolute;
     padding-top: 40px;
     left: calc(25% - 100px);
+    text-align: center;
+    font-family: Roboto_Thin;
+    font-size: 3em;
+    font-weight: bold;
 }
 
 .rightImg {
@@ -89,12 +93,17 @@ img {
     position: absolute;
     padding-top: 40px;
     left: calc(75% - 100px);
+    text-align: center;
+    font-family: Roboto_Thin;
+    font-size: 3em;
+    font-weight: bold;
 }
 
 .optionName {
     font-size: large;
     display:flex;
     justify-content: center;
+    padding-bottom: 20px;
 }
 
 .leftVote {
