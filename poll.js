@@ -1,5 +1,5 @@
 function makePoll(socket, poll, created) {
-  var colorPairs = [["#F1EADC", "#1493A5"], ["#06B8CF", "#E7CF1A"], ["#00475E", "#FF0052"], ["#3BB8C4", "#FF3D2F"], ["#E0C4D8", "#086E8D"]];
+  var colorPairs = [["#F1EADC", "#1493A5"], ["#06B8CF", "#E7CF1A"], ["#00475E", "#FF0052"], ["#3BB8C4", "light pink"], ["#E0C4D8", "#086E8D"]];
   created = created || false;
   var pollDiv = $('<div id="' + poll.id + '" class="activePollMenu"> </div>');
 
@@ -56,7 +56,7 @@ function makePoll(socket, poll, created) {
 $(document).ready(function() {
   var socket = io();
   var activePolls;
-
+  $(".mdl-textfield__input").unbind("click");
   // voted {} keeps track of which polls this socket has voted for
   voted = {}
 
