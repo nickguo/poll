@@ -53,7 +53,7 @@ io.on('connection', function(socket){
       for (index in poll.options) {
         (function(i) {
           asyncCalls.push(function(callback) {
-            request('https://ajax.googleapis.com/ajax/services/search/images?v=1.1&q=' + poll.options[i].name,
+            request('https://ajax.googleapis.com/ajax/services/search/images?v=1.1&safe=active&q=' + poll.options[i].name,
               function(error, response, body) {
                 body = JSON.parse(body);
                 try {
