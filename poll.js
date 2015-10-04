@@ -26,10 +26,10 @@ function makePoll(socket, poll, created) {
   });
 
   var leftPercentage = 0;
-  var leftBar = $("<br><div class='progress'><div class='leftBar progress-bar progress-bar-success' style='width: '" + leftPercentage + ";'></div></div>")
+  var leftBar = $("<br><div class='progress'><div class='leftBar bar-0 progress-bar progress-bar-success' style='width: '" + leftPercentage + ";'></div></div>")
 
   var rightPercentage = 0;
-  var rightBar = $("<br><div class='progress'><div class='rightBar progress-bar progress-bar-warning' style='width: '" + rightPercentage + "%;'></div></div>");
+  var rightBar = $("<br><div class='progress'><div class='rightBar bar-1 progress-bar progress-bar-warning' style='width: '" + rightPercentage + "%;'></div></div>");
 
   pollDiv.css("display", "none");
   pollDiv.fadeIn("slow", function(){});
@@ -88,6 +88,8 @@ $(document).ready(function() {
     // otherwise only update the button if the poll's been voted for
     else if (vote.id in voted) {
       countDiv.text(countDiv.attr('count'));
+      var percentage = vote["option" + vote["optIndex"]] / (vote["option0"] + vote["option1"]);
+      $('.bar' + vote["optIndex"]).css("width", percentage);
       console.log('updated countDiv');
     }
   });

@@ -31,7 +31,9 @@ io.on('connection', function(socket){
       if (!(socket.id in polls[vote.id]['voters'])) {
         polls[vote.id]['options'][vote.optIndex]['votes']++;
         polls[vote.id]['voters'][socket.id] = vote.optIndex;
-        io.emit('update_vote', vote)
+        vote["option0"] =  polls[vote.id][options][0].votes;
+        vote["option1"] =  polls[vote.id][options][1].votes;
+        io.emit('update_vote', vote);
       }
     }
   });
