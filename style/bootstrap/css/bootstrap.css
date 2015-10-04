@@ -5173,14 +5173,14 @@ a.thumbnail.active {
   height: 20px;
   margin-bottom: 20px;
   overflow: hidden;
-  background-color: #f5f5f5;
+  background-color: gold;
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
           box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
 }
 .progress-bar {
   float: left;
-  width: 0;
+  width: 50%;
   height: 100%;
   font-size: 12px;
   line-height: 20px;
@@ -5206,13 +5206,6 @@ a.thumbnail.active {
   -webkit-animation: progress-bar-stripes 2s linear infinite;
        -o-animation: progress-bar-stripes 2s linear infinite;
           animation: progress-bar-stripes 2s linear infinite;
-}
-
-.progress.active-reverse .progress-bar-reverse,
-.progress-bar.active-reverse {
-  -webkit-animation: reverse progress-bar-stripes 2s linear infinite;
-       -o-animation: reverse progress-bar-stripes 2s linear infinite;
-          animation: reverse progress-bar-stripes 2s linear infinite;
 }
 
 .progress-bar-success {
