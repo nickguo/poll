@@ -1,5 +1,22 @@
+// Uncomment to pursue using a timer countdown bar
+/*function repeatXI(callback, interval, repeats, immediate) {
+  var timer, trigger;
+  trigger = function () {
+    callback();
+    --repeats || clearInterval(timer);
+  };
+
+  interval = interval <= 0 ? 1000 : interval; // default: 1000ms
+  repeats  = parseInt(repeats, 10) || 0;      // default: repeat forever
+  timer    = setInterval(trigger, interval);
+
+  if( !!immediate ) { // Coerce boolean
+    trigger();
+  }
+}*/
+
 function makePoll(socket, poll, created) {
-  var colorPairs = [["#F1EADC", "#1493A5"], ["#06B8CF", "#E7CF1A"], ["#00475E", "#FF0052"], ["#3BB8C4", "light pink"], ["#E0C4D8", "#086E8D"]];
+  var colorPairs = [["#F1EADC", "#1493A5"], ["#06B8CF", "#E7CF1A"], ["#00475E", "#FF0052"], ["light pink", "#3BB8C4"], ["#E0C4D8", "#086E8D"]];
   created = created || false;
   var pollDiv = $('<div id="' + poll.id + '" class="activePollMenu"> </div>');
 
@@ -8,7 +25,7 @@ function makePoll(socket, poll, created) {
   var indicatorWrapperL = $('<div class="indicatorWrapper"></div>');
   var indicatorWrapperR = $('<div class="indicatorWrapper"></div>');
 
-  var descWrapper = $('<div class="descriptionBox">' + poll.title + '</div>');
+  var descWrapper = $('<div class="descriptionBox">' + poll.title + '</div>');// UNCOMMENT TO PURSUE TIMER COUNTDOWN BAR <hr class="timerBar" style="position:relative;margin:0;height:2px;color:#ff8f00;background-color:#ff8f00">');
   var voteWrapper = $('<div class="voteBox"></div>');
   var leftVote = $('<div class="leftVote"></div>');
   var rightVote = $('<div class="rightVote"></div>');
@@ -30,10 +47,6 @@ function makePoll(socket, poll, created) {
   var leftPercentage = 0;
   var leftBar = $("<br><div class='progress' style='background-color:" + colorPairing[0] + "'><div class='leftBar bar-0 progress-bar progress-bar-info' style='width: '" + leftPercentage + ";background-color:" + colorPairing[0] + "'></div></div>")
 
-
-  //var rightPercentage = 0;
-  //var rightBar = $("<br><div class='progress'><div class='rightBar bar-1 progress-bar progress-bar-warning' style='width: '" + rightPercentage + "%;'></div></div>");
-
   pollDiv.css("display", "none");
   pollDiv.fadeIn("slow", function(){});
   pollDiv.append(cardWrapper);
@@ -48,6 +61,14 @@ function makePoll(socket, poll, created) {
   progBar.append(leftBar);
   rightImg.prepend(rightOpt);
   rightImg.append(rightCount);
+
+  // UNCOMMENT TO PURSUE TIMER COUNTDOWN BAR
+  /*var barLength = parseFloat($(".timerBar").css("width"), 10);
+  var lengthCountdown = function(){
+    var currLength = parseFloat($(".timerBar").css("width"), 10);
+    $(".timerBar").css("width", currLength - barLength / 75.0);
+  };
+  repeatXI(lengthCountdown, 1000, 75);*/
   //rightImg.append(rightBar);
   //$('#' + poll.id + 'Prog0')[0].css('background-color', colorPairing[0]);
   //$('#' + poll.id + 'Prog1')[0].css('background-color', colorPairing[1]);
@@ -56,7 +77,9 @@ function makePoll(socket, poll, created) {
 $(document).ready(function() {
   var socket = io();
   var activePolls;
-  $(".mdl-textfield__input").unbind("click");
+  $(".mdl-textfield__label").unbind("focus");
+  $(".mdl-textfield__input").unbind("focus");
+
   // voted {} keeps track of which polls this socket has voted for
   voted = {}
 

@@ -69,7 +69,7 @@ io.on('connection', function(socket){
       setTimeout(function() {
         delete polls[socket.id];
         io.emit('timeout_poll', poll);
-      }, 1000 * 60);
+      }, 1000 * 75);
     }
   });
 
