@@ -185,7 +185,6 @@ img {
 #activePolls {
     display: flex;
     flex-direction: column;
-    float:left;
     width: 33%;
     height:97vh;
 }

@@ -26,10 +26,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      position: fixed;
-      width: 33%;
-      height: 100%;
-      z-index: 100;
     }
     .activePolls > .mdl-card_title {
       height: 176px;
@@ -40,8 +36,8 @@
     } 
   </style>
 
-  <body style="width:100%;">
-    <div class="activePolls mdl-card mdl-shadow--4dp" style="100%;width:50%;left:25%">
+  <body style="display: flex; justify-content: center;">
+    <div class="activePolls mdl-card mdl-shadow--4dp" style="min-width: 450px; width: 50%;">
       <div class="mdl-card__title">
         <h1 class="mdl-card__title-text ">
           Poll Feed
