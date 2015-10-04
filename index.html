@@ -3,7 +3,7 @@
   <head>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <link rel="stylesheet" type="text/css" href="./style/style.css">
-    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.red-amber.min.css" />
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.orange-amber.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <title>Poll</title>
@@ -46,26 +46,19 @@
       </div>
 
       <div class="addPollForm">
-        <div id="createNewPollForm" style="display:none;padding-top:5px;padding-left:10px">  
-          <div class="mdl-card__supporting-text" style="padding-top:0px">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin-right: 10px;padding-bottom:0px;padding-top:5px;">
-              <div style="float:left;padding-top:8px">Title</div>
-              <div style="float:right">
-                <input class="mdl-textfield__input" type="text" id="title" /> 
-              </div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="padding-bottom:0px;padding-top:8px;">
-              <div style="float:left;padding-top:8px">Option 1</div>
-              <div style="float:right">
-                <input class="mdl-textfield__input" type="text" id="option1" />
-              </div>
-            </div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="padding-top:10px">
-              <div style="float:left;padding-top:8px">Option 2</div>
-              <div style="float:right">
-                <input class="mdl-textfield__input" type="text" id="option2" style="float:right"/> 
-              </div>
-            </div>
-          </div>        
+        <div id="createNewPollForm" style="display:none;">
+          <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" pattern="[0-9]*" id="title" />
+            <label class="mdl-textfield__label" for="title">Add title</label>
+            <span class="mdl-textfield__error">Digits only</span>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" id="option1" />
+            <label class="mdl-textfield__label" for="option1">Add Option 1</label>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" id="option2" />
+            <label class="mdl-textfield__label" for="option2">Add Option 2</label>
           </div>
         </div>
       </div>
