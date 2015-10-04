@@ -134,15 +134,15 @@ $(document).ready(function() {
         if ($('#title').val() == '' || $('#option1').val() == '' || $('#option2').val() == '') {
           if ($("#title").val() == '') {
             $("#titleError").css("display", "block");
-            $("#titleDiv").css("padding-bottom", "3px");
+            $("#title").css("margin-bottom", "3px");
           }
           if ($("#option1").val() == '') {
             $("#option1Error").css("display", "block");
-            $("#option1Div").css("padding-bottom", "3px");
+            $("#option1").css("margin-bottom", "3px");
           }
           if ($("#option2").val() == '') {
             $("#option2Error").css("display", "block");
-            $("#option2Div").css("padding-bottom", "3px");
+            $("#option2").css("margin-bottom", "3px");
           } 
         }
         else {

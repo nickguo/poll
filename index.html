@@ -34,6 +34,18 @@
     .activePolls > .mdl-card__title > .mdl-card__title-text {
       font-size: 56px;
       color: #ff8f00;
+    }
+    .textInput {
+      padding: 10px;
+      border: none;
+      border-bottom: solid 2px #c9c9c9;
+      transition: border 0.3s;
+      outline: none;
+      width: 50%;
+    }
+    .textInput:focus,
+    .textInput.focus {
+      border-bottom: solid 2px #ff8f00;
     } 
   </style>
 
@@ -47,20 +59,13 @@
 
       <div class="addPollForm">
         <div id="createNewPollForm" style="display:none;">
-          <div class="mdl-textfield mdl-js-textfield" id="titleDiv">
-            <input class="mdl-textfield__input" type="text" id="title"/>
-            <label class="mdl-textfield__label" for="title">Add title</label>
-          </div>
+          <input class="textInput" style="margin-bottom: 15px;" type="text" id="title" placeholder="Add title"/>
           <span style="font-family: Roboto_Thin; font-size: 12px; color: red; display: none;" id="titleError"> Field cannot be left blank </span>
-          <div class="mdl-textfield mdl-js-textfield" id="option1Div">
-            <input class="mdl-textfield__input" type="text" id="option1" />
-            <label class="mdl-textfield__label" for="option1">Add Option 1</label>
-          </div>
+          
+          <input class="textInput" style="margin-bottom: 15px" type="text" id="option1" placeholder="Add Option 1"/> 
           <span style="font-family: Roboto_Thin; font-size: 12px; color: red; display: none;" id="option1Error"> Field cannot be left blank </span>
-          <div class="mdl-textfield mdl-js-textfield" id="option2Div">
-            <input class="mdl-textfield__input" type="text" id="option2" />
-            <label class="mdl-textfield__label" for="option2">Add Option 2</label>
-          </div>
+          
+          <input class="textInput" style="margin-bottom: 15px" type="text" id="option2" placeholder="Add Option 2"/>
           <span style="font-family: Roboto_Thin; font-size: 12px; color: red; display: none;" id="option2Error"> Field cannot be left blank </span>
         </div>
       </div>
