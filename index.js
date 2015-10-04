@@ -22,8 +22,9 @@ io.on('connection', function(socket){
 
   socket.on('vote', function(vote){
     // TODO: FIX VOTE
+    console.log("GOT VOTE: " + polls);
     // if vote.id != socket.id, emit and increme
-    if(vote.id in polls){ //&& vote.id != socket.id) {
+    if(vote.id in polls && vote.id != socket.id) {
       if (!('voters' in polls[vote.id])) {
         polls[vote.id]['voters'] = {};
       }
@@ -59,7 +60,6 @@ io.on('connection', function(socket){
         // save the image URLs into the poll
         poll.options[0].img = results[0];
         poll.options[1].img = results[1];
-        console.log(poll);
         io.emit('new_poll', poll);
       });
 

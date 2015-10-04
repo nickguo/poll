@@ -13,14 +13,14 @@ function makePoll(socket, poll, created) {
   var rightVote = $('<div class="rightVote">' + poll.options[1].name + '</div>');
   var leftImg = $('<div class="leftImg" id="' + poll.id + poll.options[0].name + 'Img" optValue="' + poll.options[0].name + '"><img src="' + poll.options[0].img + '"></div>');
   var rightImg = $('<div class="rightImg" id="' + poll.id + poll.options[1].name + 'Img" optValue="' + poll.options[1].name + '"><img src="' + poll.options[1].img + '"></div>');
-  var leftCount = $('<div class="leftCount" value="0" id="' + poll.id + poll.options[0].name + 'Count">0</div>');
-  var rightCount = $('<div class="rightCount" value="0" id="' + poll.id + poll.options[1].name + 'Count">0</div>');
+  var leftCount = $('<div class="leftCount" count="0" id="' + poll.id + 'Count' + poll.options[0].name + '">0</div>');
+  var rightCount = $('<div class="rightCount" count="0" id="' + poll.id + 'Count' + poll.options[1].name + '">0</div>');
 
   leftImg.click(function(){
-    socket.emit('vote', { 'id': $(event.target).attr("id"), 'option': $(event.target).attr("optValue"), 'voter': socket.id , 'optIndex': 0});
+    socket.emit('vote', { 'id': poll.id, 'option': poll.options[0].name, 'voter': socket.id , 'optIndex': 0});
   });
   rightImg.click(function(){
-    socket.emit('vote', { 'id': $(event.target).attr("id"), 'option': $(event.target).attr("optValue"), 'voter': socket.id , 'optIndex': 1});
+    socket.emit('vote', { 'id': poll.id, 'option': poll.options[1].name, 'voter': socket.id , 'optIndex': 1});
   });
 
   pollDiv.css("display", "none");
@@ -44,12 +44,10 @@ $(document).ready(function() {
   var activePolls;
 
   socket.on('new_poll', function(newPoll) {
-    console.log("poll received");
     makePoll(socket, newPoll, newPoll.id == socket.id);
   });
 
   socket.on('timeout_poll', function(timeoutPoll) {
-    console.log("timeout poll received");
     $('#' + timeoutPoll.id).fadeOut(1000, function() {
       $('#' + timeoutPoll.id).remove();
     });
@@ -58,23 +56,23 @@ $(document).ready(function() {
   // voted {} keeps track of which polls this socket has voted for
   voted = {}
   socket.on('update_vote', function(vote){
-    console.log('got update');
-    var button = document.getElementById(vote.id + vote.option + "Count");
-    var currentSum = parseInt(button.innerHTML);
+    var countDiv = $('#' + vote.id + "Count" + vote.option);
+    var currentSum = parseInt(countDiv.attr('count'));
+    console.log('got currentSum: ' + currentSum);
 
-    button.value = currentSum + 1;
+    countDiv.attr('count', currentSum + 1);
     // check if this poll has just been voted for by this socket
     if (!(vote.id in voted) && (vote.id == socket.id || vote.voter == socket.id)) {
       voted[vote.id] = true;
-      $('button[id^="' + vote.id +'"]').filter(
+      $('div[id^="' + vote.id +'Count"]').filter(
           function(){
-              this.innerHTML = this.value;
+              this.innerHTML = $('#' + this.id).attr('count');
               return this.id.match(/\d+$/);
           });
     }
     // otherwise only update the button if the poll's been voted for
     else if (vote.id in voted) {
-      button.innerHTML = button.value
+      countDiv.innerHTML = countDiv.value
     }
   });
 
@@ -90,49 +88,49 @@ $(document).ready(function() {
     console.log("option 2 is: " + $("#option2").val());
   });
 
-var plusPulledDown = false;
+  var plusPulledDown = false;
 
 
 
-$("#addPollDiv").click(function(){
-    if(plusPulledDown == false) {
-        //$(".addPollForm").css("display", "inline-block");
-        $(".addPollForm").css("height", "180px");
-        $(".addPollForm").css("border-bottom-color", "#ff8f00");
-        $(".addPollForm").css("border-top-color", "#ff8f00");
-       // $("#addPollDiv").css("top", "200px");
-        $("#createNewPollForm").fadeIn("slow", function(){});
-        //$("#addPollButton").css("top", "170px");
-        //$("#addPollButton").css("color", "#ff8f00");
-        plusPulledDown = true;
-    } else {
-        $(".addPollForm").css("height", "0px");
-        $(".addPollForm").css("border-bottom-color", "white");
-        $(".addPollForm").css("border-top-color", "white");
-        $("#createNewPollForm").fadeOut("slow", function(){});
-        console.log("button clicked!");
-        var pollData = 
-          {
-            'id': socket.id,
-            'title': $('#title').val(),
-            'options': 
-                [
-                    {
-                        'name': $('#option1').val(),
-                        'votes': 0,
-                        'img': ""
-                    },
-                    {
-                        'name': $('#option2').val(),
-                        'votes': 0,
-                        'img': ""
-                    }
-                ]
-          };
-        socket.emit('new_poll', pollData);
-        plusPulledDown = false;
-   }
-});
+  $("#addPollDiv").click(function(){
+      if(plusPulledDown == false) {
+          //$(".addPollForm").css("display", "inline-block");
+          $(".addPollForm").css("height", "180px");
+          $(".addPollForm").css("border-bottom-color", "#ff8f00");
+          $(".addPollForm").css("border-top-color", "#ff8f00");
+         // $("#addPollDiv").css("top", "200px");
+          $("#createNewPollForm").fadeIn("slow", function(){});
+          //$("#addPollButton").css("top", "170px");
+          //$("#addPollButton").css("color", "#ff8f00");
+          plusPulledDown = true;
+      } else {
+          $(".addPollForm").css("height", "0px");
+          $(".addPollForm").css("border-bottom-color", "white");
+          $(".addPollForm").css("border-top-color", "white");
+          $("#createNewPollForm").fadeOut("slow", function(){});
+          console.log("button clicked!");
+          var pollData = 
+            {
+              'id': socket.id,
+              'title': $('#title').val(),
+              'options': 
+                  [
+                      {
+                          'name': $('#option1').val(),
+                          'votes': 0,
+                          'img': ""
+                      },
+                      {
+                          'name': $('#option2').val(),
+                          'votes': 0,
+                          'img': ""
+                      }
+                  ]
+            };
+          socket.emit('new_poll', pollData);
+          plusPulledDown = false;
+     }
+  });
 
 });
 
